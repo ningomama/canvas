@@ -22,16 +22,19 @@
             </map>
         </div>
         <div class="buttons">
-            <input type="color" class="colorbox line-color" id="color-picker">
-            <input type="color" class="colorbox fill-color" id="color-picker">
-
-            <input type="range" id="brush-width" min="1" max="50" value="10">
-            <span class="btn btn-primary fa fa-square" id="drawing-rectangle" >Drawing Rectangle</span>
+            <span>Stroke color</span> <input type="color" class="colorbox line-color" id="color-picker">
+            <span>Fill color</span> <input type="color" class="colorbox fill-color" id="color-picker">
+            <span>Opacity</span> <input type="range" id="opacity" min="0" max="10" value="10">
+            <span>Stroke width</span> <input type="range" id="brush-width" min="1" max="50" value="10">
+            <br><span class="btn btn-primary fa fa-square" id="drawing-rectangle" >Drawing Rectangle</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-line" >Drawing Line</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-text" >Drawing Text</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-normal" >Drawing Normal</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-circle" >Drawing Circle</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-polygon" >Drawing Polygon</span>
+            <span class="btn btn-info fa fa-paint-brush" id="spray" >Spray-brush</span>
+            <span class="btn btn-info fa fa-paint-brush" id="wire" >Wire-brush</span>
+            <span class="btn btn-info fa fa-paint-brush" id="worm" >Worm-brush</span>
     
 
             <span class="btn btn-info fa fa-paint-brush" id="clear-canvas" >Clear</span>
@@ -48,6 +51,8 @@
         <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
         <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
         <script type='text/javascript' src="./javascript/brush.js"></script>
+        <script type='text/javascript' src="./javascript/SprayPaint.js"></script>
+        <script type='text/javascript' src="./javascript/artbrush.js"></script>
         <script type='text/javascript'>
 
             var funqueue = [];
@@ -101,6 +106,31 @@
                 graphicArea.reset();
                 currentFunction = new DrawingLine(contextReal,contextDraft);
             });
+
+            $('#spray').click(()=>{
+                if (currentFunction.endDrawing){
+                    currentFunction.finishGraphic();
+                }
+                graphicArea.reset();
+                currentFunction = new SprayPaint(contextReal);
+            });
+
+            $('#wire').click(()=>{
+                if (currentFunction.endDrawing){
+                    currentFunction.finishGraphic();
+                }
+                graphicArea.reset();
+                currentFunction = new ArtBrush(contextReal,10,1,5);
+            });
+
+            $('#worm').click(()=>{
+                if (currentFunction.endDrawing){
+                    currentFunction.finishGraphic();
+                }
+                graphicArea.reset();
+                currentFunction = new ArtBrush(contextReal,20,32,5);
+            });
+
             $('#drawing-text').click(()=>{
                 if (currentFunction.endDrawing){
                     //need to maintain
