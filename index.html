@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet" type='text/css'>
+    </head>
+    <body>
+        <div id="canvas-container">
+            <canvas id="canvas-real" class="canvas" width='960px' height='540px'></canvas>
+            <canvas id="canvas-draft" class="canvas" width='960px' height='540px' usemap="#planetmap"></canvas>
+            <map name="planetmap">
+                <area id='top-left'  shape="rect" coords="0,0,10,10"  >
+                <area id='top-right'  shape="rect" coords="0,0,10,10"  >
+                <area id='bottom-left'  shape="rect" coords="0,0,10,10"  >
+                <area id='bottom-right'  shape="rect" coords="0,0,10,10"  >
+            </map>
+        </div>
+        <div class="buttons">
+            <span class="btn btn-primary fa fa-square" id="drawing-rectangle" >Drawing Rectangle</span>
+            <span class="btn btn-info fa fa-paint-brush" id="drawing-line" >Drawing Line</span>
+            <span class="btn btn-info fa fa-paint-brush" id="drawing-text" >Drawing Text</span>
+            <span class="btn btn-info fa fa-paint-brush" id="drawing-normal" >Drawing Normal</span>
+            <span class="btn btn-info fa fa-paint-brush" id="drawing-circle" >Drawing Circle</span>
+            <span class="btn btn-info fa fa-paint-brush" id="drawing-polygon" >Drawing Polygon</span>
+
+            <span class="btn btn-info fa fa-paint-brush" id="clear-canvas" >Clear</span>
+        </div>
+        <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type='text/javascript' src="./javascript/canvas-common.js"></script>
+        <script type='text/javascript' src="./javascript/editDrawingArea.js"></script>
+        <script type='text/javascript' src="./javascript/drawing-line.js"></script>
+        <script type='text/javascript' src="./javascript/drawing-rectangle.js"></script>
+        <script type='text/javascript' src="./javascript/drawing-text.js"></script>
+        <script type='text/javascript' src="./javascript/drawing-normal.js"></script>
+        <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
+        <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
+        <script type='text/javascript'>
+
+            var funqueue = [];
+            
+
+            var canvas = document.getElementById('canvas-real');
+            /*
+            if (canvas.getContext){
+                var ctx = canvas.getContext('2d');
+
+                ctx.beginPath();
+                ctx.moveTo(50,50);
+                ctx.lineTo(100,100);
+                ctx.lineTo(100,50);
+                
+                ctx.lineTo(50,100);
+                ctx.fill();
+            }
+            
+
+            function dragWithCustomImage(event) {
+                var canvas = document.createElementNS("http://www.w3.org/1999/xhtml","canvas");
+                canvas.width = canvas.height = 50;
+
+                var ctx = canvas.getContext("2d");
+                ctx.lineWidth = 4;
+                ctx.moveTo(0, 0);
+                ctx.lineTo(50, 50);
+                ctx.moveTo(0, 50);
+                ctx.lineTo(50, 0);
+                ctx.stroke();
+
+                var dt = event.dataTransfer;
+                dt.setData('text/plain', 'Data to Drag');
+                dt.setDragImage(canvas, 25, 25);
+            }
+            */
+            
+            
+            $('#drawing-rectangle').click(()=>{
+                if (currentFunction.endDrawing){
+                    currentFunction.finishGraphic();
+                }
+                graphicArea.reset();
+                currentFunction = new DrawingRectangle(contextReal,contextDraft);
+            });
+            $('#drawing-line').click(()=>{
+                if (currentFunction.endDrawing){
+                    currentFunction.finishGraphic();
+                }
+                graphicArea.reset();
+                currentFunction = new DrawingLine(contextReal,contextDraft);
+            });
+            $('#drawing-text').click(()=>{
+                if (currentFunction.endDrawing){
+                    //need to maintain
+                    //currentFunction.drawLine(currentFunction.contextReal,null);
+                }
+                //currentFunction = new DrawingText(contextReal,contextDraft);
+                graphicArea.reset();
+            });
+            $('#drawing-normal').click(()=>{
+                if (currentFunction.endDrawing){
+                    currentFunction.finishGraphic();
+                }
+                graphicArea.reset();
+                currentFunction = new DrawingNormal(contextReal,contextDraft);
+            });
+            $('#drawing-circle').click(()=>{
+                if (currentFunction.endDrawing){
+                    currentFunction.finishGraphic();
+                }
+                graphicArea.reset();
+                currentFunction = new DrawingCircle(contextReal,contextDraft);
+            });
+            $('#drawing-polygon').click(()=>{
+                if (currentFunction.endDrawing){
+                    currentFunction.finishGraphic();
+                }
+                graphicArea.reset();
+                currentFunction = new DrawingPolygon(contextReal,contextDraft);
+            });
+            $('#clear-canvas').click(()=>{
+                currentFunction.reset();
+                graphicArea.reset();
+                contextReal.clearRect(0,0,canvasDraft.width,canvasDraft.height);
+            });
+            currentFunction = new DrawingNormal(contextReal,contextDraft);    
+        </script>
+    </body>
+</html>
