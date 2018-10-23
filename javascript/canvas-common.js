@@ -53,3 +53,16 @@ $('#canvas-draft').mouseenter(function(e){
     let mouseY = e.offsetY;
     currentFunction.onMouseEnter([mouseX,mouseY],e);
 });
+
+class PaintFunction{
+   constructor(){
+      graphicArea.reset();
+      graphicArea.enable = false;
+   }
+   onMouseDown(){}
+   onDragging(){}
+   onMouseMove(){}
+   onMouseUp(){}
+   onMouseLeave(){}
+   onMouseEnter(){}
+}
