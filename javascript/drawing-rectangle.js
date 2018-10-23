@@ -53,14 +53,21 @@ class DrawingRectangle extends PaintFunction{
    onMouseEnter(){}
 
    drawRectangle(drawTarget , coord){ 
+    drawTarget.strokeStyle = strokeBrush.color;
+    drawTarget.lineWidth = strokeBrush.width;
+    drawTarget.fillStyle = fillBrush.color;
       switch(true){
          case (this.points.length==1):
             drawTarget.fillRect(Math.min(this.points[0][0], coord[0]),Math.min(this.points[0][1], coord[1]),calculateLengthAbsolute(this.points[0][0],coord[0]) ,
+            calculateLengthAbsolute(this.points[0][1],coord[1]) );
+            drawTarget.strokeRect(Math.min(this.points[0][0], coord[0]),Math.min(this.points[0][1], coord[1]),calculateLengthAbsolute(this.points[0][0],coord[0]) ,
             calculateLengthAbsolute(this.points[0][1],coord[1]) );
             break;
          case (this.points.length==2):
             drawTarget.fillRect(Math.min(this.points[0][0], this.points[1][0]),Math.min(this.points[0][1], this.points[1][1]),
             calculateLengthAbsolute(this.points[0][0],this.points[1][0]),calculateLengthAbsolute(this.points[0][1],this.points[1][1]));
+            drawTarget.strokeRect(Math.min(this.points[0][0], this.points[1][0]),Math.min(this.points[0][1], this.points[1][1]),
+            calculateLengthAbsolute(this.points[0][0],this.points[1][0]),calculateLengthAbsolute(this.points[0][1],this.points[1][1]))
             break;
          default:
       }

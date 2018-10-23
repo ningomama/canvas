@@ -11,6 +11,7 @@
     </head>
     <body>
         <div id="canvas-container">
+            
             <canvas id="canvas-real" class="canvas" width='960px' height='540px'></canvas>
             <canvas id="canvas-draft" class="canvas" width='960px' height='540px' usemap="#planetmap"></canvas>
             <map name="planetmap">
@@ -21,12 +22,17 @@
             </map>
         </div>
         <div class="buttons">
+            <input type="color" class="colorbox line-color" id="color-picker">
+            <input type="color" class="colorbox fill-color" id="color-picker">
+
+            <input type="range" id="brush-width" min="1" max="50" value="10">
             <span class="btn btn-primary fa fa-square" id="drawing-rectangle" >Drawing Rectangle</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-line" >Drawing Line</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-text" >Drawing Text</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-normal" >Drawing Normal</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-circle" >Drawing Circle</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-polygon" >Drawing Polygon</span>
+    
 
             <span class="btn btn-info fa fa-paint-brush" id="clear-canvas" >Clear</span>
         </div>
@@ -41,6 +47,7 @@
         <script type='text/javascript' src="./javascript/drawing-normal.js"></script>
         <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
         <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
+        <script type='text/javascript' src="./javascript/brush.js"></script>
         <script type='text/javascript'>
 
             var funqueue = [];

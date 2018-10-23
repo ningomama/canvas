@@ -43,6 +43,9 @@ class DrawingLine extends PaintFunction{
     onMouseEnter(){}
 
     drawLine(drawTarget , coord){ 
+        drawTarget.strokeStyle = strokeBrush.color;
+        drawTarget.lineWidth = strokeBrush.width;
+
         if(this.points.length>0){
             drawTarget.beginPath();
         }

@@ -95,9 +95,10 @@ class DrawingPolygon extends PaintFunction{
                 if (drawTarget == this.contextDraft && !this.endDrawing){
                     this.drawFirstPointSensitivityPointInDraft();
                 }
-                drawTarget.strokeStyle = "#df4b26";
+                drawTarget.strokeStyle = strokeBrush.color;
+                drawTarget.lineWidth = strokeBrush.width;
+                drawTarget.fillStyle = fillBrush.color;
                 drawTarget.lineJoin = "round";
-                drawTarget.lineWidth = 5;
                 drawTarget.beginPath();
                 drawTarget.moveTo(this.paths[0][0],this.paths[0][1]);
             case (this.paths.length>1):

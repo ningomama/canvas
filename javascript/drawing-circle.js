@@ -58,6 +58,9 @@ class DrawingCircle extends PaintFunction{
     }
 
     drawCircle(drawTarget , coord){ 
+        drawTarget.strokeStyle = strokeBrush.color;
+        drawTarget.lineWidth = strokeBrush.width;
+        drawTarget.fillStyle = fillBrush.color;
         if(this.points.length>0){
             drawTarget.beginPath();
         }
@@ -75,6 +78,7 @@ class DrawingCircle extends PaintFunction{
         if(this.points.length>0){
             drawTarget.closePath();
             drawTarget.stroke();
+            drawTarget.fill();
         }
 
         /*

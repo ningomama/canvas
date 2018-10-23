@@ -43,6 +43,8 @@ class DrawingNormal extends PaintFunction{
 
     draw(drawTarget , coord){ 
         if(this.points.length>0){
+            drawTarget.strokeStyle = strokeBrush.color;
+            drawTarget.lineWidth = strokeBrush.width;
             drawTarget.beginPath();
             drawTarget.moveTo(this.points[0][0],this.points[0][1]);
             for (let i=0;i<this.points.length-1;i++){
