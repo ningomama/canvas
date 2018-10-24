@@ -1,16 +1,13 @@
 class editDrawingArea{
    constructor( topLeftPoint  , bottomRightPoint){
-      this.enable = false;
-      this.topLeftPoint = [9999,9999];
-      this.bottomRightPoint = [0,0];
+      this.graphicAreaMargin = 10;
+      this.reset();
    }
-
    reset(){
       this.enable = false;
-      this.topLeftPoint = [9999,9999];
-      this.bottomRightPoint = [0,0];
+      this.topLeftPoint = [99999,99999];
+      this.bottomRightPoint = [-10000,-10000];
    }
-
    get TopLeftPoint() {
       return this.topLeftPoint;
    }
@@ -27,117 +24,112 @@ class editDrawingArea{
       this.enable = trueFalse;
    }
 
+   get topLeftPointWithMargin() {
+      return [this.topLeftPoint[0]-this.graphicAreaMargin,this.topLeftPoint[1]-this.graphicAreaMargin];
+   }
+   get topRightPointWithMargin() {
+      return [this.bottomRightPoint[0]+this.graphicAreaMargin,this.topLeftPoint[1]-this.graphicAreaMargin];
+   }
+   get bottomLeftPointWithMargin() {
+      return [this.topLeftPoint[0]-this.graphicAreaMargin,this.bottomRightPoint[1]+this.graphicAreaMargin];
+   }
+   get bottomRightPointWithMargin() {
+      return [this.bottomRightPoint[0]+this.graphicAreaMargin,this.bottomRightPoint[1]+this.graphicAreaMargin];
+   }
+
 }
 let graphicArea = new editDrawingArea();
 
-function isPointInGraphicArea(point){
-   if (graphicArea.topLeftPoint[0] <= point[0] && graphicArea.topLeftPoint[1] <= point[1]){
-      if(graphicArea.bottomRightPoint[0] >= point[0] && graphicArea.bottomRightPoint[1] >= point[1]){
-            return true;
-      }
-   }
-   return false;
-}
 
-function calculateGraphicAreaSize(pointArray){
-   switch(true){
-      case (currentFunction instanceof DrawingPolygon):
-         graphicArea.topLeftPoint = [99999,99999];
-         graphicArea.bottomRightPoint = [0,0];
-         for(let i=0 ; i < pointArray.length ;i++){
+function isPointInGraphicArea(mousePoint){
+      if (graphicArea.topLeftPointWithMargin[0] <= mousePoint[0] && graphicArea.topLeftPointWithMargin[1] <= mousePoint[1] &&
+            graphicArea.bottomRightPointWithMargin[0] >= mousePoint[0] && graphicArea.bottomRightPointWithMargin[1] >= mousePoint[1]){
+            return true;
+      }else{
+            return false;
+      }
+}
+function resetGraphicAreaTwoPoints(){
+      graphicArea.topLeftPoint = [99999,99999];
+      graphicArea.bottomRightPoint = [-10000,-10000];
+}
+function calculateGraphicAreaSizeInOrigin(pointArray){
+      resetGraphicAreaTwoPoints();
+      for(let i=0 ; i < pointArray.length ;i++){
             if(pointArray[i][0]<graphicArea.topLeftPoint[0]){
-               graphicArea.topLeftPoint[0] = pointArray[i][0];
+                  graphicArea.topLeftPoint[0] = pointArray[i][0];
             }
             if(pointArray[i][1]<graphicArea.topLeftPoint[1]){
-               graphicArea.topLeftPoint[1] = pointArray[i][1];
+                  graphicArea.topLeftPoint[1] = pointArray[i][1];
             }
             if(pointArray[i][0]>graphicArea.bottomRightPoint[0]){
-               graphicArea.bottomRightPoint[0] = pointArray[i][0];
+                  graphicArea.bottomRightPoint[0] = pointArray[i][0];
             }
             if(pointArray[i][1]>graphicArea.bottomRightPoint[1]){
-               graphicArea.bottomRightPoint[1] = pointArray[i][1];
+                  graphicArea.bottomRightPoint[1] = pointArray[i][1];
             }
-         }
-         break;
-      case (currentFunction instanceof DrawingRectangle):
-         graphicArea.topLeftPoint = [99999,99999];
-         graphicArea.bottomRightPoint = [0,0];
-         let maxX = Math.max( pointArray[0][0], pointArray[1][0]);
-         let maxY = Math.max( pointArray[0][1], pointArray[1][1]);
-         let minX = Math.min( pointArray[0][0], pointArray[1][0]);
-         let minY = Math.min( pointArray[0][1], pointArray[1][1]);
-         if(minX<graphicArea.topLeftPoint[0]){
-            graphicArea.topLeftPoint[0] = minX;
-         }
-         if(minY<graphicArea.topLeftPoint[1]){
+      }
+}
+function calculateGraphicAreaSizeInRectangle(pointArray){
+      resetGraphicAreaTwoPoints();
+      let maxX = Math.max( pointArray[0][0], pointArray[1][0]);
+      let maxY = Math.max( pointArray[0][1], pointArray[1][1]);
+      let minX = Math.min( pointArray[0][0], pointArray[1][0]);
+      let minY = Math.min( pointArray[0][1], pointArray[1][1]);
+      if(minX<graphicArea.topLeftPoint[0]){
+            graphicArea.topLeftPoint[0] = minX; 
+      }
+      if(minY<graphicArea.topLeftPoint[1]){
             graphicArea.topLeftPoint[1] = minY;
-         }
-         if(maxX>graphicArea.bottomRightPoint[0]){
+      }
+      if(maxX>graphicArea.bottomRightPoint[0]){
             graphicArea.bottomRightPoint[0] = maxX;
-         }
-         if(maxY>graphicArea.bottomRightPoint[1]){
+      }
+      if(maxY>graphicArea.bottomRightPoint[1]){
             graphicArea.bottomRightPoint[1] = maxY;
-         }
-         break;
+      }
+}
+function calculateGraphicAreaSizeInCircle(pointArray){
+      resetGraphicAreaTwoPoints();
+      let circleRadius = getDistinctFromStartPointToEndPoint(pointArray[0][0] ,
+             pointArray[0][1],[pointArray[1][0] , pointArray[1][1]])/2;
+      let maxX = (pointArray[0][0] + pointArray[1][0])/2 + circleRadius;
+      let maxY = (pointArray[0][1] + pointArray[1][1])/2 + circleRadius;
+      let minX = (pointArray[0][0] + pointArray[1][0])/2 - circleRadius;
+      let minY = (pointArray[0][1] + pointArray[1][1])/2 - circleRadius;
+      
+      if( minX <graphicArea.topLeftPoint[0]){
+            graphicArea.topLeftPoint[0] = minX;
+      }
+      if(minY <graphicArea.topLeftPoint[1]){
+            graphicArea.topLeftPoint[1] = minY;
+      }
+      if(maxX>graphicArea.bottomRightPoint[0]){
+            graphicArea.bottomRightPoint[0] = maxX;
+      }
+      if(maxY>graphicArea.bottomRightPoint[1]){
+            graphicArea.bottomRightPoint[1] = maxY;
+      }
+}
+function calculateGraphicAreaSize(pointArray){
+      switch(true){
+      case (currentFunction instanceof DrawingPolygon):
+            calculateGraphicAreaSizeInOrigin(pointArray);
+            break;
+      case (currentFunction instanceof DrawingRectangle):
+            calculateGraphicAreaSizeInRectangle(pointArray);
+            break;
       case (currentFunction instanceof DrawingCircle):
-         graphicArea.topLeftPoint = [99999,99999];
-         graphicArea.bottomRightPoint = [0,0];
-         let circleRadius = currentFunction.getDistinctFromStartPointToEndPoint(pointArray[0][0] , pointArray[0][1],[pointArray[1][0] , pointArray[1][1]])/2;
-         let circleMaxX = (pointArray[0][0] + pointArray[1][0])/2 + circleRadius;
-         let circleMaxY = (pointArray[0][1] + pointArray[1][1])/2 + circleRadius;
-         let circleMinX = (pointArray[0][0] + pointArray[1][0])/2 - circleRadius;
-         let circleMinY = (pointArray[0][1] + pointArray[1][1])/2 - circleRadius;
-         
-         if( circleMinX <graphicArea.topLeftPoint[0]){
-            graphicArea.topLeftPoint[0] = circleMinX;
-         }
-         if(circleMinY <graphicArea.topLeftPoint[1]){
-            graphicArea.topLeftPoint[1] = circleMinY;
-         }
-         if(circleMaxX>graphicArea.bottomRightPoint[0]){
-            graphicArea.bottomRightPoint[0] = circleMaxX;
-         }
-         if(circleMaxY>graphicArea.bottomRightPoint[1]){
-            graphicArea.bottomRightPoint[1] = circleMaxY;
-         }
-         break;
+            calculateGraphicAreaSizeInCircle(pointArray);
+            break;
       case (currentFunction instanceof DrawingLine):
-         graphicArea.topLeftPoint = [99999,99999];
-         graphicArea.bottomRightPoint = [0,0];
-         for(let i=0 ; i < pointArray.length ;i++){
-            if(pointArray[i][0]<graphicArea.topLeftPoint[0]){
-               graphicArea.topLeftPoint[0] = pointArray[i][0];
-            }
-            if(pointArray[i][1]<graphicArea.topLeftPoint[1]){
-               graphicArea.topLeftPoint[1] = pointArray[i][1];
-            }
-            if(pointArray[i][0]>graphicArea.bottomRightPoint[0]){
-               graphicArea.bottomRightPoint[0] = pointArray[i][0];
-            }
-            if(pointArray[i][1]>graphicArea.bottomRightPoint[1]){
-               graphicArea.bottomRightPoint[1] = pointArray[i][1];
-            }
-         }
-         break;
+            calculateGraphicAreaSizeInOrigin(pointArray);
+            break;
       case (currentFunction instanceof DrawingNormal):
-         graphicArea.topLeftPoint = [99999,99999];
-         graphicArea.bottomRightPoint = [0,0];
-         for(let i=0 ; i < pointArray.length ;i++){
-            if(pointArray[i][0]<graphicArea.topLeftPoint[0]){
-               graphicArea.topLeftPoint[0] = pointArray[i][0];
-            }
-            if(pointArray[i][1]<graphicArea.topLeftPoint[1]){
-               graphicArea.topLeftPoint[1] = pointArray[i][1];
-            }
-            if(pointArray[i][0]>graphicArea.bottomRightPoint[0]){
-               graphicArea.bottomRightPoint[0] = pointArray[i][0];
-            }
-            if(pointArray[i][1]>graphicArea.bottomRightPoint[1]){
-               graphicArea.bottomRightPoint[1] = pointArray[i][1];
-            }
-         }
-         break;
+            calculateGraphicAreaSizeInOrigin(pointArray);
+            break;
       default:
+            console.log('No currentFunction or currentFunction not in case selected in calculateGraphicAreaSize(pointArray)');
    }
 
 }
@@ -147,6 +139,7 @@ function handleGraphicAreaMove(point){
    let yDiff = point[1]-previousMousePosition[1];
    graphicArea.topLeftPoint = [(graphicArea.topLeftPoint[0] + xDiff) , ( graphicArea.topLeftPoint[1] + yDiff)];
    graphicArea.bottomRightPoint = [(graphicArea.bottomRightPoint[0] + xDiff) , ( graphicArea.bottomRightPoint[1] + yDiff)];
+      
 }
 
 function drawGraphicAreaInDraft(){
@@ -154,17 +147,24 @@ function drawGraphicAreaInDraft(){
    contextDraft.lineJoin = "";
    contextDraft.lineWidth = 1;
    contextDraft.beginPath();
-   contextDraft.moveTo(graphicArea.topLeftPoint[0],graphicArea.topLeftPoint[1]);
-   contextDraft.lineTo(graphicArea.bottomRightPoint[0],graphicArea.topLeftPoint[1]);
-   contextDraft.lineTo(graphicArea.bottomRightPoint[0],graphicArea.bottomRightPoint[1]);
-   contextDraft.lineTo(graphicArea.topLeftPoint[0],graphicArea.bottomRightPoint[1]);
-   contextDraft.lineTo(graphicArea.topLeftPoint[0],graphicArea.topLeftPoint[1]);
-   
+   contextDraft.moveTo(graphicArea.topLeftPointWithMargin[0],graphicArea.topLeftPointWithMargin[1]);
+   contextDraft.lineTo(graphicArea.topRightPointWithMargin[0],graphicArea.topRightPointWithMargin[1]);
+   contextDraft.lineTo(graphicArea.bottomRightPointWithMargin[0],graphicArea.bottomRightPointWithMargin[1]);
+   contextDraft.lineTo(graphicArea.bottomLeftPointWithMargin[0],graphicArea.bottomLeftPointWithMargin[1]);
+   contextDraft.lineTo(graphicArea.topLeftPointWithMargin[0],graphicArea.topLeftPointWithMargin[1]);
    contextDraft.closePath();
    contextDraft.stroke();
-   //alert('pspsps');
 }
 
+function getDistinctFromStartPointToEndPoint( startX , startY , coord ){
+      var XPointDiff = Math.abs(startX - coord[0]);
+      XPointDiff *= XPointDiff;
+      var YPointDiff = Math.abs(startY - coord[1]);
+      YPointDiff *= YPointDiff;
+      return Math.sqrt( (XPointDiff+YPointDiff) );
+}
+
+//where to use it?
 function calculateLengthAbsolute( point1, point2){
    return Math.abs(point1-point2);
 }

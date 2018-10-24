@@ -32,6 +32,7 @@
             <span class="btn btn-info fa fa-paint-brush" id="drawing-normal" >Drawing Normal</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-circle" >Drawing Circle</span>
             <span class="btn btn-info fa fa-paint-brush" id="drawing-polygon" >Drawing Polygon</span>
+            <span class="btn btn-info fa fa-paint-brush" id="wipe" >Wipe</span>
     
 
             <span class="btn btn-info fa fa-paint-brush" id="clear-canvas" >Clear</span>
@@ -47,6 +48,7 @@
         <script type='text/javascript' src="./javascript/drawing-normal.js"></script>
         <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
         <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
+        <script type='text/javascript' src="./javascript/Wipe.js"></script>
         <script type='text/javascript' src="./javascript/brush.js"></script>
         <script type='text/javascript'>
 
@@ -88,17 +90,13 @@
             
             
             $('#drawing-rectangle').click(()=>{
-                if (currentFunction.endDrawing){
-                    currentFunction.finishGraphic();
-                }
                 graphicArea.reset();
+                currentFunction.finishGraphic();
                 currentFunction = new DrawingRectangle(contextReal,contextDraft);
             });
             $('#drawing-line').click(()=>{
-                if (currentFunction.endDrawing){
-                    currentFunction.finishGraphic();
-                }
                 graphicArea.reset();
+                currentFunction.finishGraphic();
                 currentFunction = new DrawingLine(contextReal,contextDraft);
             });
             $('#drawing-text').click(()=>{
@@ -110,32 +108,32 @@
                 graphicArea.reset();
             });
             $('#drawing-normal').click(()=>{
-                if (currentFunction.endDrawing){
-                    currentFunction.finishGraphic();
-                }
                 graphicArea.reset();
+                currentFunction.finishGraphic();
                 currentFunction = new DrawingNormal(contextReal,contextDraft);
             });
             $('#drawing-circle').click(()=>{
-                if (currentFunction.endDrawing){
-                    currentFunction.finishGraphic();
-                }
                 graphicArea.reset();
+                currentFunction.finishGraphic();
                 currentFunction = new DrawingCircle(contextReal,contextDraft);
             });
             $('#drawing-polygon').click(()=>{
-                if (currentFunction.endDrawing){
-                    currentFunction.finishGraphic();
-                }
                 graphicArea.reset();
+                currentFunction.finishGraphic();
                 currentFunction = new DrawingPolygon(contextReal,contextDraft);
             });
-            $('#clear-canvas').click(()=>{
-                currentFunction.reset();
+            $('#wipe').click(()=>{
                 graphicArea.reset();
+                currentFunction.finishGraphic();
+                currentFunction = new Wipe(contextReal,contextDraft);
+            });
+            $('#clear-canvas').click(()=>{
+                graphicArea.reset();
+                currentFunction.reset();
                 contextReal.clearRect(0,0,canvasDraft.width,canvasDraft.height);
             });
             currentFunction = new DrawingNormal(contextReal,contextDraft);    
+
         </script>
     </body>
 </html>
