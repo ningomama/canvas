@@ -24,7 +24,7 @@ $('#canvas-draft').mousedown(function(e){
 //need to modify in future
 $('#canvas-draft').mousemove(function(e){
    //need to modify??
-   /*
+   
    let mouseX = e.offsetX;
    let mouseY = e.offsetY;
    contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
@@ -40,56 +40,17 @@ $('#canvas-draft').mousemove(function(e){
    }
    currentFunction.onMouseMove([mouseX,mouseY],e);
    previousMousePosition = [mouseX, mouseY];
-   */
+   
 });
 
-$('#canvas-draft').mousemove(function(e){
-    var rect = e.target.getBoundingClientRect();
-    /*
-    $("#myTable").position().top;
-    
-    (e.clientX - $("#canvas-real").position().left<0)? x=0
-    (e.clientX - $("#canvas-real").position().left>canvasReal.width)? x=canvasReal.width
-    (e.clientY - $("#canvas-real").position().top<0)? y=0
-    (e.clientY - $("#canvas-real").position().top>canvasReal.height)? y=canvasReal.height
-    */
-
-    let mouseX = e.clientX - $("#canvas-real").position().left;
-    mouseX = (mouseX <0) ? 0 : ((mouseX >canvasReal.width) ? canvasReal.width : mouseX );
-    let mouseY = e.clientY - $("#canvas-real").position().top;
-    mouseY = (mouseY <0) ? 0 : ((mouseY >canvasReal.height) ? canvasReal.height : mouseY );
-
-
-    contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
-    if (graphicArea.enable){
-        drawGraphicAreaInDraft();
-    }
-    if(dragging){
-        if (graphicArea.enable && isPointInGraphicArea(previousMousePosition)){
-            currentFunction.handleGraphicMove([mouseX,mouseY]);
-            handleGraphicAreaMove([mouseX,mouseY]);
-        }
-        currentFunction.onDragging([mouseX,mouseY],e);
-    }
-    currentFunction.onMouseMove([mouseX,mouseY],e);
-    previousMousePosition = [mouseX, mouseY];
-
-    //console.log("body mouse move"+e.clientX+'    '+e.clientY);
-});
-
+//need to modify in furture
 $('#canvas-draft').mouseup(function(e){
+    
     dragging = false;
-
-    var rect = e.target.getBoundingClientRect();
-
-    let mouseX = e.clientX - $("#canvas-real").position().left;
-    mouseX = (mouseX <0) ? 0 : ((mouseX >canvasReal.width) ? canvasReal.width : mouseX );
-    let mouseY = e.clientY - $("#canvas-real").position().top;
-    mouseY = (mouseY <0) ? 0 : ((mouseY >canvasReal.height) ? canvasReal.height : mouseY );
-
+    let mouseX = e.offsetX;
+    let mouseY = e.offsetY;
     currentFunction.onMouseUp([mouseX,mouseY],e);
 
-    // push actions into the undo/redo array
     canvasPush();
 });
 
