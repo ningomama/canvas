@@ -40,6 +40,7 @@ class DrawingNormal extends PaintFunction{
             //currentFunction.onMouseUp(coord);
         }
     }
+    
     onDragging(coord,event){
         if (!this.endDrawing){
             this.points.push(coord);

@@ -43,7 +43,7 @@ $('#canvas-draft').mousemove(function(e){
    
 });
 
-//need to modify in furture
+//need to modify in future
 $('#canvas-draft').mouseup(function(e){
     
     dragging = false;
@@ -51,7 +51,7 @@ $('#canvas-draft').mouseup(function(e){
     let mouseY = e.offsetY;
     currentFunction.onMouseUp([mouseX,mouseY],e);
 
-    canvasPush();
+    // canvasPush();
 });
 
 //need to modify in future

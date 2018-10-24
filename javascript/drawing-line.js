@@ -46,7 +46,6 @@ class DrawingLine extends PaintFunction{
                 this.endDrawing = true;
                 graphicArea.enable = true;
             }
-            
         }
     }
     onMouseLeave(){}
