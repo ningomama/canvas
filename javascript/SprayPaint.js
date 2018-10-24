@@ -22,6 +22,13 @@ class SprayPaint extends PaintFunction{
     onMouseLeave(){}
     onMouseEnter(){}
 
+    onDblclick(coord,event){
+    }
+
+    onClick(coord,event){
+
+    }
+
     getRandomOffset(radius) {
         var random_angle = Math.random() * (2*Math.PI);
         var random_radius = Math.random() * radius;

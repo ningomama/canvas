@@ -59,4 +59,11 @@ class ArtBrush extends PaintFunction{
         this.points = [];
         this.ctx.clearRect(0,0,canvasDraft.width,canvasDraft.height);
     }
+
+    onDblclick(coord,event){
+    }
+
+    onClick(coord,event){
+
+    }
 }
