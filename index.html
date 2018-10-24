@@ -1,64 +1,73 @@
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <link href="style.css" rel="stylesheet" type='text/css'>
-    </head>
-    <body>
-        <div id="canvas-container">
-            
-            <canvas id="canvas-real" class="canvas" width='960px' height='540px'></canvas>
-            <canvas id="canvas-draft" class="canvas" width='960px' height='540px' usemap="#planetmap"></canvas>
-            <map name="planetmap">
-                <area id='top-left'  shape="rect" coords="0,0,10,10"  >
-                <area id='top-right'  shape="rect" coords="0,0,10,10"  >
-                <area id='bottom-left'  shape="rect" coords="0,0,10,10"  >
-                <area id='bottom-right'  shape="rect" coords="0,0,10,10"  >
-            </map>
-        </div>
-        <div class="buttons">
-            <span>Stroke color</span> <input type="color" class="colorbox line-color" id="color-picker">
-            <span>Fill color</span> <input type="color" class="colorbox fill-color" id="color-picker">
-            <span>Opacity</span> <input type="range" id="opacity" min="0" max="10" value="10">
-            <span>Stroke width</span> <input type="range" id="brush-width" min="1" max="50" value="10">
-            <br><span class="btn btn-primary fa fa-square" id="drawing-rectangle" >Drawing Rectangle</span>
-            <span class="btn btn-info fa fa-paint-brush" id="drawing-line" >Drawing Line</span>
-            <span class="btn btn-info fa fa-paint-brush" id="drawing-text" >Drawing Text</span>
-            <span class="btn btn-info fa fa-paint-brush" id="drawing-normal" >Drawing Normal</span>
-            <span class="btn btn-info fa fa-paint-brush" id="drawing-circle" >Drawing Circle</span>
-            <span class="btn btn-info fa fa-paint-brush" id="drawing-polygon" >Drawing Polygon</span>
-            <span class="btn btn-info fa fa-paint-brush" id="wipe" >Wipe</span>
-            <span class="btn btn-info fa fa-paint-brush" id="spray" >Spray-brush</span>
-            <span class="btn btn-info fa fa-paint-brush" id="wire" >Wire-brush</span>
-            <span class="btn btn-info fa fa-paint-brush" id="worm" >Worm-brush</span>
-    
 
-            <span class="btn btn-info fa fa-paint-brush" id="clear-canvas" >Clear</span>
-        </div>
-        <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script type='text/javascript' src="./javascript/canvas-common.js"></script>
-        <script type='text/javascript' src="./javascript/editDrawingArea.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-line.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-rectangle.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-text.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-normal.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
-        <script type='text/javascript' src="./javascript/Wipe.js"></script>
-        <script type='text/javascript' src="./javascript/brush.js"></script>
-        <script type='text/javascript' src="./javascript/SprayPaint.js"></script>
-        <script type='text/javascript' src="./javascript/artbrush.js"></script>
-        <script type='text/javascript'>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type='text/css'>
+</head>
 
+<body>
+    <div id="canvas-container">
+
+        <canvas id="canvas-real" class="canvas" width='960px' height='540px'></canvas>
+        <canvas id="canvas-draft" class="canvas" width='960px' height='540px' usemap="#planetmap"></canvas>
+        <map name="planetmap">
+            <area id='top-left' shape="rect" coords="0,0,10,10">
+            <area id='top-right' shape="rect" coords="0,0,10,10">
+            <area id='bottom-left' shape="rect" coords="0,0,10,10">
+            <area id='bottom-right' shape="rect" coords="0,0,10,10">
+        </map>
+    </div>
+    <div class="buttons">
+        <span>Stroke color</span> <input type="color" class="colorbox line-color" id="color-picker">
+        <span>Fill color</span> <input type="color" class="colorbox fill-color" id="color-picker">
+        <span>Opacity</span> <input type="range" id="opacity" min="0" max="10" value="10">
+        <span>Stroke width</span> <input type="range" id="brush-width" min="1" max="50" value="10">
+        <br><span class="btn btn-primary fa fa-square" id="drawing-rectangle">Drawing Rectangle</span>
+        <span class="btn btn-info fa fa-paint-brush" id="drawing-line">Drawing Line</span>
+        <span class="btn btn-info fa fa-paint-brush" id="drawing-text">Drawing Text</span>
+        <span class="btn btn-info fa fa-paint-brush" id="drawing-normal">Drawing Normal</span>
+        <span class="btn btn-info fa fa-paint-brush" id="drawing-circle">Drawing Circle</span>
+        <span class="btn btn-info fa fa-paint-brush" id="drawing-polygon">Drawing Polygon</span>
+        <span class="btn btn-info fa fa-paint-brush" id="wipe">Wipe</span>
+        <span class="btn btn-info fa fa-paint-brush" id="spray">Spray-brush</span>
+        <span class="btn btn-info fa fa-paint-brush" id="wire">Wire-brush</span>
+        <span class="btn btn-info fa fa-paint-brush" id="worm">Worm-brush</span>
+
+        <span class="btn btn-info fa fa-paint-brush" id="undo">Undo</span>
+        <span class="btn btn-info fa fa-paint-brush" id="redo">Redo</span>
+        <span class="btn btn-info fa fa-paint-brush" id="clear-canvas">Clear</span>
+        <a href="#" id="btn-download" download="my-drawing.png"><span class="btn btn-info fa fa-paint-brush">Save</span></a>
+
+    </div>
+
+    <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script type='text/javascript' src="./javascript/canvas-common.js"></script>
+    <script type='text/javascript' src="./javascript/editDrawingArea.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-line.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-rectangle.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-text.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-normal.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
+    <script type='text/javascript' src="./javascript/Wipe.js"></script>
+    <script type='text/javascript' src="./javascript/brush.js"></script>
+    <script type='text/javascript' src="./javascript/SprayPaint.js"></script>
+    <script type='text/javascript' src="./javascript/artbrush.js"></script>
+    <script type='text/javascript' src="./javascript/undo-redo.js"></script>
+    <script type='text/javascript' src="./javascript/save-btn.js"></script>
+    <script type='text/javascript'>
+
+        $(function () {
             var funqueue = [];
-            
+
 
             var canvas = document.getElementById('canvas-real');
             /*
@@ -92,78 +101,92 @@
                 dt.setDragImage(canvas, 25, 25);
             }
             */
-            
-            
-            $('#drawing-rectangle').click(()=>{
+
+
+            $('#drawing-rectangle').click(() => {
                 graphicArea.reset();
                 currentFunction.finishGraphic();
-                currentFunction = new DrawingRectangle(contextReal,contextDraft);
+                currentFunction = new DrawingRectangle(contextReal, contextDraft);
             });
-            $('#drawing-line').click(()=>{
+            $('#drawing-line').click(() => {
                 graphicArea.reset();
                 currentFunction.finishGraphic();
-                currentFunction = new DrawingLine(contextReal,contextDraft);
+                currentFunction = new DrawingLine(contextReal, contextDraft);
             });
 
-            $('#spray').click(()=>{
-                if (currentFunction.endDrawing){
+            $('#spray').click(() => {
+                if (currentFunction.endDrawing) {
                     currentFunction.finishGraphic();
                 }
                 graphicArea.reset();
                 currentFunction = new SprayPaint(contextReal);
             });
 
-            $('#wire').click(()=>{
-                if (currentFunction.endDrawing){
+            $('#wire').click(() => {
+                if (currentFunction.endDrawing) {
                     currentFunction.finishGraphic();
                 }
                 graphicArea.reset();
-                currentFunction = new ArtBrush(contextReal,10,1,5);
+                currentFunction = new ArtBrush(contextReal, 10, 1, 5);
             });
 
-            $('#worm').click(()=>{
-                if (currentFunction.endDrawing){
+            $('#worm').click(() => {
+                if (currentFunction.endDrawing) {
                     currentFunction.finishGraphic();
                 }
                 graphicArea.reset();
-                currentFunction = new ArtBrush(contextReal,20,32,5);
+                currentFunction = new ArtBrush(contextReal, 20, 32, 5);
             });
 
-            $('#drawing-text').click(()=>{
-                if (currentFunction.endDrawing){
+            $('#drawing-text').click(() => {
+                if (currentFunction.endDrawing) {
                     //need to maintain
                     //currentFunction.drawLine(currentFunction.contextReal,null);
                 }
                 //currentFunction = new DrawingText(contextReal,contextDraft);
                 graphicArea.reset();
             });
-            $('#drawing-normal').click(()=>{
+            $('#drawing-normal').click(() => {
                 graphicArea.reset();
                 currentFunction.finishGraphic();
-                currentFunction = new DrawingNormal(contextReal,contextDraft);
+                currentFunction = new DrawingNormal(contextReal, contextDraft);
             });
-            $('#drawing-circle').click(()=>{
+            $('#drawing-circle').click(() => {
                 graphicArea.reset();
                 currentFunction.finishGraphic();
-                currentFunction = new DrawingCircle(contextReal,contextDraft);
+                currentFunction = new DrawingCircle(contextReal, contextDraft);
             });
-            $('#drawing-polygon').click(()=>{
+            $('#drawing-polygon').click(() => {
                 graphicArea.reset();
                 currentFunction.finishGraphic();
-                currentFunction = new DrawingPolygon(contextReal,contextDraft);
+                currentFunction = new DrawingPolygon(contextReal, contextDraft);
             });
-            $('#wipe').click(()=>{
+            $('#wipe').click(() => {
                 graphicArea.reset();
                 currentFunction.finishGraphic();
-                currentFunction = new Wipe(contextReal,contextDraft);
+                currentFunction = new Wipe(contextReal, contextDraft);
             });
-            $('#clear-canvas').click(()=>{
+            $('#clear-canvas').click(() => {
                 graphicArea.reset();
                 currentFunction.reset();
-                contextReal.clearRect(0,0,canvasDraft.width,canvasDraft.height);
-            });
-            currentFunction = new DrawingNormal(contextReal,contextDraft);    
+                contextReal.clearRect(0, 0, canvasDraft.width, canvasDraft.height);
 
-        </script>
-    </body>
+                // canvas needs a background colour!
+                contextReal.fillStyle = '#fff';
+                contextReal.fillRect(0, 0, canvasDraft.width, canvasDraft.height);
+                canvasArray.push(canvasReal.toDataURL());
+
+                canvasArray = new Array();
+                canvasStep = -1;
+
+                canvasPush();
+            });
+            currentFunction = new DrawingNormal(contextReal, contextDraft);
+
+            canvasPush();
+        })
+
+    </script>
+</body>
+
 </html>

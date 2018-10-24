@@ -5,6 +5,10 @@ let contextDraft = canvasDraft.getContext('2d');
 let currentFunction;
 let dragging = false;
 
+// setting the canvas background for undo/redo compatibility
+contextReal.fillStyle = '#fff';
+contextReal.fillRect(0, 0, contextReal.canvas.width, contextReal.canvas.height);
+
 let previousMousePosition;
 let sensitivity = 3.5;
 let minDrawLength = 3;
@@ -37,12 +41,14 @@ $('#canvas-draft').mousemove(function(e){
    previousMousePosition = [mouseX, mouseY];
 });
 
-//need to modify in furture
+//need to modify in future
 $('#canvas-draft').mouseup(function(e){
     dragging = false;
     let mouseX = e.offsetX;
     let mouseY = e.offsetY;
     currentFunction.onMouseUp([mouseX,mouseY],e);
+    
+    canvasPush();
 });
 
 $('#canvas-draft').mouseleave(function(e){
