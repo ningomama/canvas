@@ -17,8 +17,10 @@ class DrawingLine extends PaintFunction{
     }
 
     onMouseDown(coord,event){
-        if(!isPointInGraphicArea(coord)){
+        //need to be bug fix (not push!!!!!!)
+        if(!isPointInGraphicArea(coord) && this.endDrawing){
             graphicArea.enable = false;
+            // need
             this.drawLine(this.contextReal , null);
             currentFunction = new DrawingLine(contextReal,contextDraft);
             //currentFunction.onMouseUp(coord);
