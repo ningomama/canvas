@@ -32,6 +32,8 @@ class DrawingCircle extends PaintFunction{
         drawTarget.strokeStyle = strokeBrush.color;
         drawTarget.lineWidth = strokeBrush.width;
         drawTarget.fillStyle = fillBrush.color;
+        drawTarget.globalAlpha = strokeBrush.opacity;
+
         if(this.points.length>0){
             drawTarget.beginPath();
         }
