@@ -65,12 +65,47 @@ class DrawingPolygon extends PaintFunction{
         }
         */
 
+       if (this.endDrawing){
+        if(!isPointInGraphicArea(coord)){
+            //var dataURL = this.contextDraft.toDataURL();
+            //alert(dataURL);
+            graphicArea.enable = false;
+            this.drawPolygon(this.contextReal , null);
+            currentFunction = new DrawingPolygon(contextReal,contextDraft);
+            currentFunction.onMouseUp(coord);
+            //currentFunction.onClick(coord , null);
+        }
+        //alert('endDrawing');
+    }else if (this.firstPoint){
+        this.origX = coord[0];
+        this.origY = coord[1];
+        this.firstPoint = false;
+        //calculateGraphicAreaSize(this.paths);
+        this.points.push(coord);
+        //alert('firstPoint');
+    }else{
+        if( this.isEndPoint([this.origX , this.origY] , coord) ){
+            this.points.push([this.origX , this.origY]);
+            calculateGraphicAreaSize(this.points);
+            //this.drawPolygon(this.contextReal , null);
+            graphicArea.enable = true;
+            this.endDrawing = true;
+        }else{
+            calculateGraphicAreaSize(this.points);
+            this.points.push(coord);
+        }
+        //alert('else');
+    }
+    console.log('ddd');
+
+
     }
     onMouseLeave(){}
     onMouseEnter(){}
 
     onClick(coord,event){
         //alert('sss');
+        /*
         if (this.endDrawing){
             if(!isPointInGraphicArea(coord)){
                 //var dataURL = this.contextDraft.toDataURL();
@@ -102,18 +137,21 @@ class DrawingPolygon extends PaintFunction{
             //alert('else');
         }
         console.log('ddd');
+        */
     }
     onDblclick(coord,event){
         if(!this.endDrawing && !this.firstPoint){
             //this.paths.push(this.paths[0]);
-            this.onClick(coord,null);
-            this.onClick(this.points[0],null);
+
+            //this.onClick(coord,null);
+            //this.onClick(this.points[0],null);
         }else if(this.endDrawing && isPointInGraphicArea(coord)){
             graphicArea.reset();
             this.drawPolygon(this.contextReal , null);
             currentFunction = new DrawingPolygon(contextReal,contextDraft);
         }else if(this.endDrawing){
-            this.onClick(coord,null);
+            this.onmouseup(coord);
+            //this.onClick(coord,null);
         }
     }
 
