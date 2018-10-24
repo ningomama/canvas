@@ -13,7 +13,7 @@ class Wipe extends PaintFunction{
     }
 
     draw(drawTarget , coord){ 
-        drawTarget.clearRect(previousMousePosition[0],previousMousePosition[1],10,10);
+        drawTarget.clearRect(previousMousePosition[0],previousMousePosition[1],100,100);
     }
 
     onMouseDown(coord,event){
@@ -25,6 +25,7 @@ class Wipe extends PaintFunction{
     onMouseMove(coord){
     }
     onMouseUp(coord){
+        canvasPush();
     }
     onDblclick(coord,event){
     }

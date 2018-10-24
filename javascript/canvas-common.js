@@ -51,7 +51,7 @@ $('#canvas-draft').mouseup(function(e){
     let mouseY = e.offsetY;
     currentFunction.onMouseUp([mouseX,mouseY],e);
 
-    canvasPush();
+    //canvasPush();
 });
 
 //need to modify in future

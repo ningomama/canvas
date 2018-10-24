@@ -12,6 +12,7 @@ class DrawingNormal extends PaintFunction{
         this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
         console.log("reset()");
     }
+
     finishGraphic(){
         if(this.endDrawing){
             this.draw(this.contextReal,null);
@@ -37,6 +38,7 @@ class DrawingNormal extends PaintFunction{
             graphicArea.reset();
             this.finishGraphic();
             currentFunction = new DrawingNormal(contextReal,contextDraft);
+            canvasPush();
             //currentFunction.onMouseUp(coord);
         }
     }
@@ -63,6 +65,7 @@ class DrawingNormal extends PaintFunction{
             graphicArea.reset();
             this.finishGraphic();
             currentFunction = new DrawingNormal(contextReal,contextDraft);
+            canvasPush();
         }
     }
 
