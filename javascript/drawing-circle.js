@@ -23,6 +23,7 @@ class DrawingCircle extends PaintFunction{
             graphicArea.reset();
             this.drawCircle(this.contextReal , null);
             currentFunction = new DrawingCircle(contextReal,contextDraft);
+            canvasPush();
         }
     }
 
@@ -98,6 +99,7 @@ class DrawingCircle extends PaintFunction{
                 graphicArea.enable = false;
                 this.drawCircle(this.contextReal , null);
                 currentFunction = new DrawingCircle(contextReal,contextDraft);
+                canvasPush();
                 //currentFunction.onMouseUp(coord);
             }
         }

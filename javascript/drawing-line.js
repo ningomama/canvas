@@ -23,6 +23,7 @@ class DrawingLine extends PaintFunction{
             // need
             this.drawLine(this.contextReal , null);
             currentFunction = new DrawingLine(contextReal,contextDraft);
+            canvasPush();
             //currentFunction.onMouseUp(coord);
         }
     }
@@ -58,6 +59,7 @@ class DrawingLine extends PaintFunction{
             graphicArea.enable = false;
             this.drawLine(this.contextReal , null);
             currentFunction = new DrawingLine(contextReal,contextDraft);
+            canvasPush();
         }
     }
 
