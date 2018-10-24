@@ -25,7 +25,7 @@ body{
 }
 
 #canvas-container{
-   height:100vh;
+   height:1050px;
 }
 
 area{
@@ -42,18 +42,19 @@ input[type=range]{
 
 #tool-bar{
     display: flex;
-    height: 93vh;
-    width: 70vw;
+    width: 80vw;
     flex-flow: row wrap;
     align-items: flex-end;
     justify-content: flex-end;
+    position: absolute;
+    top: 630px;
 
 }
 
 #tool-box{
-    position: absolute;
+    /* position: absolute;
     bottom: 20px;
-    right: 10vw;
+    right: 10; */
     width: 150px;
     height: 150px;
     margin-left: 50px;
@@ -78,6 +79,7 @@ input[type=range]{
 .hide{
     display:none;
 }
+
 .tool-slide{
     display: flex;
     align-items: center;
