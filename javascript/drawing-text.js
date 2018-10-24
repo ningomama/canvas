@@ -33,6 +33,12 @@ class DrawingText extends PaintFunction{
     onMouseLeave(){}
     onMouseEnter(){}
 
+    onClick(coord,event){
+
+    }
+    onDblclick(coord,event){
+
+    }
 
     finishGraphic(){
         //this.drawLine(this.contextReal,null);

@@ -1,30 +1,49 @@
+//done?
 class DrawingNormal extends PaintFunction{
-    constructor(contextReal){
+    constructor(contextReal,contextDraft){
         super();
         this.contextReal = contextReal;   
         this.contextDraft = contextDraft; 
-        this.endDrawing = false;
-        this.points = [];     
-        this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);       
+        this.reset();      
     }
-   
-    onMouseDown(coord,event){
+    reset(){
+        this.endDrawing = false;
+        this.points = [];
+        this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
+        console.log("reset()");
+    }
+    finishGraphic(){
         if(this.endDrawing){
-            if(!isPointInGraphicArea(coord)){
-                //var dataURL = this.contextDraft.toDataURL();
-                //alert(dataURL);
-                graphicArea.enable = false;
-                this.draw(this.contextReal , null);
-                currentFunction = new DrawingNormal(contextReal,contextDraft);
-                //currentFunction.onMouseUp(coord);
+            this.draw(this.contextReal,null);
+        }
+    }
+
+    draw(drawTarget , coord){ 
+        if(this.points.length>0){
+            //alert('ssss');
+            drawTarget.strokeStyle = strokeBrush.color;
+            drawTarget.lineWidth = strokeBrush.width;
+            drawTarget.beginPath();
+            drawTarget.moveTo(this.points[0][0],this.points[0][1]);
+            for (let i=0;i<this.points.length-1;i++){
+                drawTarget.lineTo(this.points[i][0],this.points[i][1]);
             }
+            drawTarget.stroke();
+        }
+    }
+
+    onMouseDown(coord,event){
+        if(!isPointInGraphicArea(coord) && this.endDrawing){
+            graphicArea.reset();
+            this.finishGraphic();
+            currentFunction = new DrawingNormal(contextReal,contextDraft);
+            //currentFunction.onMouseUp(coord);
         }
     }
     onDragging(coord,event){
         if (!this.endDrawing){
             this.points.push(coord);
         }
-        //console.log(this.points.length);
     }
 
     onMouseMove(coord){
@@ -33,25 +52,25 @@ class DrawingNormal extends PaintFunction{
     }
     onMouseUp(coord){
         if(!this.endDrawing){
-            calculateGraphicAreaSize(this.points);
+            //calculateGraphicAreaSize(this.points);
             this.endDrawing = true;
-            graphicArea.enable = true;
+            //graphicArea.enable = true;
         }
     }
+    onDblclick(coord,event){
+        if(isPointInGraphicArea(coord)){
+            graphicArea.reset();
+            this.finishGraphic();
+            currentFunction = new DrawingNormal(contextReal,contextDraft);
+        }
+    }
+
+
     onMouseLeave(){}
     onMouseEnter(){}
 
-    draw(drawTarget , coord){ 
-        if(this.points.length>0){
-            drawTarget.beginPath();
-            drawTarget.moveTo(this.points[0][0],this.points[0][1]);
-            for (let i=0;i<this.points.length-1;i++){
-                drawTarget.lineTo(this.points[i][0],this.points[i][1]);
-                //drawTarget.moveTo(this.points[i+1][0],this.points[i+1][1]);
-            }
-            //drawTarget.closePath();
-            drawTarget.stroke();
-        }
+    onClick(coord,event){
+
     }
 
     handleGraphicMove(point){
@@ -65,12 +84,6 @@ class DrawingNormal extends PaintFunction{
         }
     };
 
-    finishGraphic(){
-        this.draw(this.contextReal,null);
-    }
-    reset(){
-        this.endDrawing = false;
-        this.points = [];
-        this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
-    }
+    
+
 }

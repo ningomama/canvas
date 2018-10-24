@@ -9,6 +9,7 @@
 
 #canvas-draft{
    background-color: transparent;
+   z-index: 99;
 }
 
 body{
@@ -23,3 +24,51 @@ area{
 map{
    display: inline;
 }  
+
+input[type=range]{
+    width:100px;
+    display: inline-block;
+}
+
+.colorbox{
+    width: 50px;
+    height:50px;
+    border: solid rgb(184, 172, 172) 1px;
+    display: inline-block;
+    border-radius:5px;
+}
+
+ul{
+    list-style-type:none;
+    display: inline-block;
+}
+
+#slash1{
+    width: 50px;
+    height: 10px;
+    border-bottom: solid #000 1px;
+}
+
+#slash3{
+    width: 50px;
+    height: 10px;
+    border-bottom: solid #000 3px;
+}
+
+#slash5{
+    width: 50px;
+    height: 10px;
+    border-bottom: solid #000 5px;
+}
+
+#slash7{
+    width: 50px;
+    height: 10px;
+    border-bottom: solid #000 8px;
+}
+
+#slash9{
+    width: 50px;
+    height: 10px;
+    border-bottom: solid #000 10px;
+}
