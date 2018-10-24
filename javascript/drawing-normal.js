@@ -56,6 +56,7 @@ class DrawingNormal extends PaintFunction{
             this.endDrawing = true;
             //graphicArea.enable = true;
         }
+        this.onMouseDown(coord,event);
     }
     onDblclick(coord,event){
         if(isPointInGraphicArea(coord)){
