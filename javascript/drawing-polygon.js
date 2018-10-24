@@ -78,7 +78,7 @@ class DrawingPolygon extends PaintFunction{
                 graphicArea.enable = false;
                 this.drawPolygon(this.contextReal , null);
                 currentFunction = new DrawingPolygon(contextReal,contextDraft);
-                currentFunction.onClick(coord , null);
+                //currentFunction.onClick(coord , null);
             }
             //alert('endDrawing');
         }else if (this.firstPoint){
