@@ -6,39 +6,51 @@ class DrawingText extends PaintFunction{
         this.firstPoint = true;
         this.endDrawing = false;
         this.points = [];
+        this.i = 1;
         this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);        
     }
 
     onMouseDown(coord,event){
-        this.contextReal.fillStyle = "#f44";
-        this.origX = coord[0];
-        this.origY = coord[1];
-    }
-    onDragging(coord,event){
-        this.contextDraft.fillStyle = "#f44";
-        this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
+        this.origX = coord[0]
+        this.origY = coord[1]
+        
+        this.boxTop = this.origY + 50;
+        this.boxLeft = this.origX + 50;
+      
+        this.color = strokeBrush.color;
+        this.fontsize = strokeBrush.width + "px";
 
-        this.contextDraft.font = "30px Arial";
-        this.contextDraft.fillText("Hello World",200,50);
-        //this.contextDraft.fillRect(this.origX,this.origY,coord[0]- this.origX,coord[1] - this.origY)
+        $(`<input class="textbox" id=${this.i} type="textarea" placeholder="TEXT HERE"/>`).insertAfter("#canvas-draft")
+        $('#'+ this.i).css({fontSize: this.fontsize, color:this.color, visibility:"visible", position:"fixed", top: this.boxTop, left: this.boxLeft});
+        this.i ++
+    }
+    onDragging(){
+        
     }
 
     onMouseMove(){}
-    onMouseUp(coord){
-        this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
-        this.contextReal.font = "30px Arial";
-        this.contextReal.fillText("Hello World",10,50);
-        //ctx.strokeText("Hello World",10,50);
+    onMouseUp(){
     }
     onMouseLeave(){}
     onMouseEnter(){}
 
     onClick(coord,event){
-
     }
     onDblclick(coord,event){
-
     }
+
+    
+    onKeyEnter(event){
+        
+        let textCount = this.i -1;
+        let textInput = $('#'+ textCount).val();
+        this.contextReal.fillStyle = this.color;
+        this.contextReal.font = `${this.fontsize} Arial`;
+        this.contextReal.fillText(textInput,this.origX,this.origY);
+        $('#'+ textCount).css({visibility:"hidden", position:"fixed", top: 0, left: 0});
+        canvasPush();
+    };
+
 
     finishGraphic(){
         //this.drawLine(this.contextReal,null);

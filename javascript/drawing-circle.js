@@ -9,9 +9,11 @@ class DrawingCircle extends PaintFunction{
     reset(){
         this.firstPoint = true;
         this.endDrawing = false;
+        // all user click will store in array
         this.points = [];
         this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
     }
+    //drawing the circle to the real canvas if the drawing is finish
     finishGraphic(){
         if(this.endDrawing){
             this.drawCircle(this.contextReal,null);
@@ -19,6 +21,10 @@ class DrawingCircle extends PaintFunction{
     }
     
     onDblclick(coord,event){
+        //if finish drawing and double click in edit GraphicArea
+        //1.reset and hide the edit graphic Area and draw the graphic to real canvas if in the edit graphic Area and 
+        //2.draw the graphic to real canvas
+        //3.push canvasPush
         if(this.endDrawing && isPointInGraphicArea(coord)){
             graphicArea.reset();
             currentFunction.drawCircle(this.contextReal , null);
@@ -28,30 +34,36 @@ class DrawingCircle extends PaintFunction{
     }
 
 
-
+    
     drawCircle(drawTarget , coord){ 
+        //setting
         drawTarget.strokeStyle = strokeBrush.color;
         drawTarget.lineWidth = strokeBrush.width;
         drawTarget.fillStyle = fillBrush.color;
         drawTarget.globalAlpha = strokeBrush.opacity;
 
         if(this.points.length>0){
+            //start
             drawTarget.beginPath();
         }
+        // if only click first point 
         if(this.points.length==1){
-            //alert('wwwww');
+            // check if the the first click point and mouse point is >= minDrawLength , draw if yes
             if (getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1],coord)  >= minDrawLength)
             drawTarget.arc( (this.points[0][0] + coord[0] )/2, (this.points[0][1] + coord[1] )/2,
             getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1],coord)/2 
             ,0,2*Math.PI);
         }
+        // if click two points
         if(this.points.length == 2){
+            // check if the the two click point length is >= minDrawLength , draw if yes
             if (getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1],[this.points[1][0] , this.points[1][1]])  >= minDrawLength)
             drawTarget.arc( (this.points[0][0] + this.points[1][0] )/2, (this.points[0][1] + this.points[1][1] )/2,
             getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1],[this.points[1][0] , this.points[1][1]] )/2
             ,0,2*Math.PI);
         }
         if(this.points.length>0){
+            //end the circle
             drawTarget.closePath();
             drawTarget.stroke();
             drawTarget.fill();
@@ -60,25 +72,30 @@ class DrawingCircle extends PaintFunction{
 
 
     onDragging(coord,event){
+        //will set the first click point if click the first point
         if (this.firstPoint){
             this.points[0] = [coord[0],coord[1]];
             this.firstPoint = false;
         }
-        //console.log('onDragging');
     }
 
     onMouseMove(coord){
-        console.log('onDragging');
+        //console.log('onDragging');
+        // draw the circle in every MouseMove
         this.drawCircle(this.contextDraft,coord);
     }
     onMouseUp(coord){
+        //when dragging before and drawing is not end before
         if (!this.firstPoint && !this.endDrawing){
-            this.points[1] = [coord[0],coord[1]];
-            // important
-            if (getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1],[this.points[1][0] , this.points[1][1]])  < minDrawLength){
-                //this.finishGraphic(); 
+            //if user draw a too small circle {
+            //  reset the setting (cancle user input) 
+            //}else{
+            //  calculateGraphicAreaSize() and show graphicArea   
+            //}
+            if (getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1],coord)  < minDrawLength){
                 this.reset();
             }else{
+                this.points[1] = [coord[0],coord[1]];
                 calculateGraphicAreaSize(this.points);
                 this.endDrawing = true;
                 graphicArea.enable = true;
@@ -87,15 +104,16 @@ class DrawingCircle extends PaintFunction{
     }
     onMouseLeave(){}
     onMouseEnter(){}
-
     onClick(coord,event){
 
     }
     onMouseDown(coord,event){
+        // if already draw a clicle and mouse is not in edit Graphic Area,
+        // hide edit graphic Area
+        // draw circle to real canvas and new DrawingCircle
+        // save canvas
         if(this.endDrawing){
             if(!isPointInGraphicArea(coord)){
-                //var dataURL = this.contextDraft.toDataURL();
-                //alert(dataURL);
                 graphicArea.enable = false;
                 this.drawCircle(this.contextReal , null);
                 currentFunction = new DrawingCircle(contextReal,contextDraft);

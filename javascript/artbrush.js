@@ -5,6 +5,7 @@ class ArtBrush extends PaintFunction{
         this.density = density;
         this.thickness = thickness;
         this.rad = rad;
+        this.endDrawing = false;
     }
 
     onMouseDown(coord, event){
@@ -14,7 +15,8 @@ class ArtBrush extends PaintFunction{
         this.ctx.lineWidth = this.thickness;
         this.ctx.beginPath();
         this.ctx.moveTo(coord[0],coord[1]);
-        this.spray(coord[0],coord[1]);      
+        this.spray(coord[0],coord[1]);   
+        this.endDrawing = false;   
     }
 
     onDragging(coord,event){
@@ -26,6 +28,7 @@ class ArtBrush extends PaintFunction{
         this.endDrawing = true;
         canvasPush();
     }
+<<<<<<< HEAD
     onMouseLeave(){
         if(!this.endDrawing) {
             this.endDrawing = true;
@@ -34,6 +37,16 @@ class ArtBrush extends PaintFunction{
 
     }
     onMouseEnter(){}
+=======
+
+    onMouseLeave(){
+        if(!this.endDrawing) {
+            canvasPush();
+        this.endDrawing = true;
+    }
+    }
+    onMouseEnter(){ }
+>>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
 
     getRandomOffset(radius) {
         var random_angle = Math.random() * (2*Math.PI);

@@ -1,15 +1,15 @@
 class DrawingPolygon extends PaintFunction{
-   constructor(contextReal,contextDraft){
-       super();
-       this.contextReal = contextReal;   
-       this.contextDraft = contextDraft;     
-       this.reset();
-   }
-   
-   finishGraphic(){
-       if(this.endDrawing){
-        this.drawPolygon(this.contextReal,null);
-       }
+    constructor(contextReal,contextDraft){
+        super();
+        this.contextReal = contextReal;   
+        this.contextDraft = contextDraft;     
+        this.reset();
+    }
+    //drawing to the real canvas if the drawing is finish
+    finishGraphic(){ 
+        if(this.endDrawing){
+            this.drawPolygon(this.contextReal,null);
+        }
     }
     reset(){
         this.firstPoint = true;
@@ -22,58 +22,23 @@ class DrawingPolygon extends PaintFunction{
         
     }
     onDragging(coord,event){
-        if(isPointInGraphicArea(previousMousePosition) && this.endDrawing){
-            //alert('wwwww');
-                //handleGraphicAreaMove(coord);
-                //this.handleGraphicMove(coord);
-
-        }
     }
     onMouseMove(coord){
         this.drawPolygon(this.contextDraft , coord);
     }
 
     onMouseUp(coord){
-        /*
-        if (this.endDrawing){
-            if(!isPointInGraphicArea(coord)){
-                //var dataURL = this.contextDraft.toDataURL();
-                //alert(dataURL);
-                graphicArea.enable = false;
-                this.drawPolygon(this.contextReal , null);
-                currentFunction = new DrawingPolygon(contextReal,contextDraft);
-                //currentFunction.onMouseUp(coord);
-            }
-        }else if (this.firstPoint){
-            this.origX = coord[0];
-            this.origY = coord[1];
-            this.firstPoint = false;
-            //calculateGraphicAreaSize(this.paths);
-            this.paths.push(coord);
-        }else{
-            if( this.isEndPoint([this.origX , this.origY] , coord) ){
-                this.paths.push([this.origX , this.origY]);
-                calculateGraphicAreaSize(this.paths);
-                //this.drawPolygon(this.contextReal , null);
-                graphicArea.enable = true;
-                this.endDrawing = true;
-            }else{
-                calculateGraphicAreaSize(this.paths);
-                this.paths.push(coord);
-            }
-        }
-        */
-
     }
     onMouseLeave(){}
     onMouseEnter(){}
 
     onClick(coord,event){
-        //alert('sss');
         if (this.endDrawing){
+            //if finish drawing and double click in edit GraphicArea
+            //1.reset and hide the edit graphic Area and draw the graphic to real canvas if in the edit graphic Area and 
+            //2.draw the graphic to real canvas
+            //3.push canvasPush
             if(!isPointInGraphicArea(coord)){
-                //var dataURL = this.contextDraft.toDataURL();
-                //alert(dataURL);
                 graphicArea.enable = false;
                 this.drawPolygon(this.contextReal , null);
                 currentFunction = new DrawingPolygon(contextReal,contextDraft);
@@ -85,10 +50,9 @@ class DrawingPolygon extends PaintFunction{
             this.origX = coord[0];
             this.origY = coord[1];
             this.firstPoint = false;
-            //calculateGraphicAreaSize(this.paths);
             this.points.push(coord);
-            //alert('firstPoint');
         }else{
+            //if click in second point and the point is nearly first point
             if( this.isEndPoint([this.origX , this.origY] , coord) ){
                 this.points.push([this.origX , this.origY]);
                 calculateGraphicAreaSize(this.points);
@@ -96,7 +60,7 @@ class DrawingPolygon extends PaintFunction{
                 graphicArea.enable = true;
                 this.endDrawing = true;
             }else{
-                calculateGraphicAreaSize(this.points);
+                //calculateGraphicAreaSize(this.points);
                 this.points.push(coord);
             }
             //alert('else');
@@ -104,6 +68,10 @@ class DrawingPolygon extends PaintFunction{
         console.log('ddd');
     }
     onDblclick(coord,event){
+        //if finish drawing and double click in edit GraphicArea
+        //1.reset and hide the edit graphic Area and draw the graphic to real canvas if in the edit graphic Area and 
+        //2.draw the graphic to real canvas
+        //3.push canvasPush
         if(!this.endDrawing && !this.firstPoint){
             //this.paths.push(this.paths[0]);
             this.onClick(coord,null);
@@ -120,16 +88,13 @@ class DrawingPolygon extends PaintFunction{
 
 
     isEndPoint(startPoint , point){
-        //console.log("point[0]"+point[0]);
-        //console.log("startPoint[0]"+startPoint[0]);
-        //console.log("sensitivity"+sensitivity);
-        //if(point[0] == null || startPoint[0]==null)
-        //alert('oh');
+        //check if user click is near the first user click point or not
         if (point[0] < (startPoint[0] +sensitivity) &&  point[0] > (startPoint[0] -sensitivity)){
             if (point[1] < (startPoint[1] +sensitivity) &&  point[1] > (startPoint[1] -sensitivity)){
                 return true;
             }
         }
+        return false;
     }
 
     drawFirstPointSensitivityPointInDraft(){
@@ -159,6 +124,7 @@ class DrawingPolygon extends PaintFunction{
                 drawTarget.strokeStyle = strokeBrush.color;
                 drawTarget.lineWidth = strokeBrush.width;
                 drawTarget.fillStyle = fillBrush.color;
+                drawTarget.globalAlpha = strokeBrush.opacity;
                 drawTarget.lineJoin = "round";
                 drawTarget.beginPath();
                 drawTarget.moveTo(this.points[0][0],this.points[0][1]);

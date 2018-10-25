@@ -2,6 +2,7 @@ class SprayPaint extends PaintFunction{
     constructor(contextReal){
         super();
         this.ctx = contextReal;
+        this.endDrawing = false;
     }
 
     onMouseDown(coord, event){
@@ -10,7 +11,8 @@ class SprayPaint extends PaintFunction{
         let w = this.ctx.lineWidth = strokeBrush.width;
         this.ctx.beginPath();
         this.ctx.moveTo(coord[0],coord[1]);
-        this.spray(coord[0],coord[1],w);    
+        this.spray(coord[0],coord[1],w);  
+        this.endDrawing = false;  
     }
 
     onDragging(coord,event){
@@ -24,10 +26,17 @@ class SprayPaint extends PaintFunction{
         canvasPush();
     }
     onMouseLeave(){
+<<<<<<< HEAD
         if (!this.endDrawing) {
             this.endDrawing = true;
             canvasPush();
         }
+=======
+        if(!this.endDrawing) {
+            canvasPush();
+        this.endDrawing = true;
+    }
+>>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
     }
     onMouseEnter(){}
 
