@@ -27,7 +27,7 @@ class DrawingCircle extends PaintFunction{
     }
 
 
-
+    
     drawCircle(drawTarget , coord){ 
         drawTarget.strokeStyle = strokeBrush.color;
         drawTarget.lineWidth = strokeBrush.width;

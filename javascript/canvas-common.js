@@ -101,6 +101,19 @@ $("#canvas-draft")
 }); 
 
 
+
+$("body").keypress(function(e){
+    dragging = false;
+    // let mouseX = e.offsetX;
+    // let mouseY = e.offsetY;
+    let keycode = (e.keyCode ? e.keyCode : e.which);
+    if(keycode == '13'){
+     currentFunction.onKeyEnter(e);
+    }
+   
+})
+
+
 class PaintFunction{
    constructor(){
       graphicArea.reset();

@@ -158,6 +158,7 @@ class DrawingPolygon extends PaintFunction{
                 drawTarget.strokeStyle = strokeBrush.color;
                 drawTarget.lineWidth = strokeBrush.width;
                 drawTarget.fillStyle = fillBrush.color;
+                drawTarget.globalAlpha = strokeBrush.opacity;
                 drawTarget.lineJoin = "round";
                 drawTarget.beginPath();
                 drawTarget.moveTo(this.points[0][0],this.points[0][1]);

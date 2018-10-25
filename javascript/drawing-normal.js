@@ -14,7 +14,7 @@ class DrawingNormal extends PaintFunction{
     }
     finishGraphic(){
         if(this.endDrawing){
-            this.draw(this.contextReal,null);
+            this.draw(this.contextReal, this.contextDraft);
         }
     }
 
@@ -61,7 +61,7 @@ class DrawingNormal extends PaintFunction{
         if(isPointInGraphicArea(coord)){
             graphicArea.reset();
             this.finishGraphic();
-            currentFunction = new DrawingNormal(contextReal,contextDraft);
+            currentFunction = new DrawingNormal(contextReal);
         }
     }
 

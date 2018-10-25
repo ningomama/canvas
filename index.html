@@ -23,8 +23,8 @@
 
                 <div class="control"> 
                         <div class="fa fa-paint-brush" id="clear-canvas">Clear</div>
-                        <div class="fa fa-paint-brush" id="undo">Undo</div>
-                        <div class="fa fa-paint-brush" id="redo">Redo</div>
+                        <div title="undo" id="undo"><i class="fas fa-undo-alt"></i></div>
+                        <div title ="redo" id="redo"><i class="fas fa-redo-alt"></i></div>
                         <a href="#" id="btn-download" download="my-drawing.png"><div class="fa fa-paint-brush">Save</div></a>
                 </div>
     
@@ -43,35 +43,37 @@
         <div id="tool-bar">
            
             <div class="tool-plate hide">
-                <div class="tool-slide"><div>0</div> <input type="range" id="opacity" min="0" max="10" value="10">
-                <div>100%</div></div>
+                <div class="tool-slide"><div>0</div> <input title="Opacity" type="range" id="opacity" min="0" max="10" value="10">
+                <div >100%</div></div>
                 <div class="colorbox">
-                    <div><i class="fas fa-pencil-alt"></i></div> <div><input type="color" class="line-color" id="color-picker"></div>
+                    <div><i class="fas fa-pencil-alt"></i></div> <div><input title="Brush color" type="color" class="line-color" id="color-picker"></div>
+                    <div title="no color"class="nofill" id="l-nofill"></div>
                 </div>
                 <div class="colorbox">
-                    <div><i class="fas fa-fill-drip"></i></div> <div><input type="color" class="fill-color" id="color-picker"></div>
+                    <div><i class="fas fa-fill-drip"></i></div> <div><input title="Fill color" type="color" class="fill-color" id="color-picker"></div>
+                    <div title="no color" class="nofill" id="f-nofill"></div>
                 </div>
                 
             </div>
-            <div class="tool-plate hide">
-                <div class="tool-icon"><i class="far fa-vector-square fa-2x" id="drawing-rectangle" ></i></div>
-                <div class="tool-icon"><i class="fas fa-ruler fa-2x" id="drawing-line"></i></div>
-                <div class="tool-icon"><i class="far fa-circle fa-2x" id="drawing-circle"></i> </div>
-                <div class="tool-icon"><i class="fas fa-draw-polygon fa-2x" id="drawing-polygon"></i></div>
+            <div title="SHAPES" class="tool-plate hide">
+                <div class="tool-icon"><i title="Rectangle" class="far fa-square fa-2x" id="drawing-rectangle" ></i></div>
+                <div class="tool-icon"><i title="Ruler" class="fas fa-ruler fa-2x" id="drawing-line"></i></div>
+                <div class="tool-icon"><i title="Circle" class="far fa-circle fa-2x" id="drawing-circle"></i> </div>
+                <div class="tool-icon"><i title="Polygon" class="fas fa-draw-polygon fa-2x" id="drawing-polygon"></i></div>
             </div>
             <div class="tool-plate hide">
-                <div class="tool-slide"><div>0</div><input type="range" id="brush-width" min="1" max="50" value="10"><div>50</div></div>
-                <div class="tool-icon"><i class="fas fa-pencil-alt fa-2x" id="drawing-normal"></i></div>
-                <div class="tool-icon"><span class="btn btn-info fa fa-paint-brush" id="worm" >Pom pom</span></div>
-                <div class="tool-icon"><span class="btn btn-info fa fa-paint-brush" id="wire" >Wire</span></div>
-                <div class="tool-icon"><i class="fas fa-spray-can fa-2x" id="spray"></i></div>
+                <div class="tool-slide"><div>0</div><input title="brush-width" type="range" id="brush-width" min="1" max="50" value="10"><div>50</div></div>
+                <div class="tool-icon"><i title="Pen" class="fas fa-pencil-alt fa-2x" id="drawing-normal"></i></div>
+                <div class="tool-icon"><i title="Pom pom" class="fas fa-certificate fa-2x" id="worm"></i></div>
+                <div class="tool-icon"><i title= "Wire" class="fa fa-paint-brush" id="wire" >Wire</i></div>
+                <div class="tool-icon"><i title="Spray" class="fas fa-spray-can fa-2x" id="spray"></i></div>
                 
             </div>
             <div class="tool-plate hide">
-                <div class="tool-icon"><i class="fas fa-eraser fa-3x" id="wipe"></i></div>
+                <div class="tool-icon"><i title="Eraser" class="fas fa-eraser fa-3x" id="wipe"></i></div>
             </div>
             <div class="tool-plate hide">
-                <div class="tool-icon"><i class="fas fa-font fa-3x" id="drawing-text"></i></div>
+                <div class="tool-icon"><i title="text" class="fas fa-font fa-3x" id="drawing-text"></i></div>
             </div>
          <div id="tool-box"><i class="fas fa-box fa-10x"></i></div>
         </div>
@@ -80,7 +82,7 @@
         
 
 
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -177,11 +179,12 @@
 
             $('#drawing-text').click(() => {
                 if (currentFunction.endDrawing) {
-                    //need to maintain
-                    //currentFunction.drawLine(currentFunction.contextReal,null);
+                    // //need to maintain
+                    // currentFunction.drawLine(currentFunction.contextReal,null);
                 }
-                //currentFunction = new DrawingText(contextReal,contextDraft);
+                currentFunction = new DrawingText(contextReal,contextDraft);
                 graphicArea.reset();
+                needFinishGraphic();
             });
             $('#drawing-normal').click(() => {
                 graphicArea.reset();
@@ -227,6 +230,8 @@
                     case currentFunction instanceof SprayPaint:
                         break;
                     case currentFunction instanceof ArtBrush:
+                        break;
+                    case currentFunction instanceof DrawingText:
                         break;
                     default:
                         currentFunction.finishGraphic();

@@ -11,18 +11,23 @@ let fillBrush = {
 
 $('.line-color').on('input', function () {
     strokeBrush.color = this.value;
-    console.log(strokeBrush.color);
-    alert('.line-color change');
 });
+
+$("#l-nofill").on("click", function(){
+    strokeBrush.color = "transparent";
+})
 
 $('.fill-color').on('input', function () {
     fillBrush.color = this.value;
-    alert('.fill-color change');
 });
+
+$("#f-nofill").on("click", function(){
+    fillBrush.color = "transparent";
+})
 
 $('#brush-width').on('input', function () {
     strokeBrush.width = this.value;
-    console.log(strokeBrush.width);
+
 });
 
 $('#opacity').on('input', function () {
