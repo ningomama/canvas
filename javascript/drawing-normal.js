@@ -3,45 +3,6 @@ class DrawingNormal extends PaintFunction{
         super();
         this.ctx = contextReal;
         this.endDrawing = false;
-<<<<<<< HEAD
-        //save all the mouse position when onDragging 
-        this.points = [];
-        this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
-        //console.log("reset()");
-    }
-    //drawing to the real canvas if the drawing is finish
-    finishGraphic(){
-        if(this.endDrawing){
-            this.draw(this.contextReal,null);
-        }
-    }
-
-    draw(drawTarget , coord){ 
-        if(this.points.length>0){
-            //setting
-            drawTarget.strokeStyle = strokeBrush.color;
-            drawTarget.lineWidth = strokeBrush.width;
-            drawTarget.beginPath();
-            //move to the first Dragging point
-            drawTarget.moveTo(this.points[0][0],this.points[0][1]);
-            for (let i=0;i<this.points.length-1;i++){
-                //draw all by the points
-                drawTarget.lineTo(this.points[i][0],this.points[i][1]);
-            }
-            drawTarget.stroke();
-        }
-    }
-
-    onMouseDown(coord,event){
-        
-        if(!isPointInGraphicArea(coord) && this.endDrawing){
-            graphicArea.reset();
-            this.finishGraphic();
-            currentFunction = new DrawingNormal(contextReal,contextDraft);
-            canvasPush();
-            //currentFunction.onMouseUp(coord);
-        }
-=======
     }
 
     onMouseDown(coord, event){
@@ -68,7 +29,6 @@ class DrawingNormal extends PaintFunction{
         if(!this.endDrawing) {
             canvasPush();
         this.endDrawing = true;
->>>>>>> f9715428203462c60f669ffd31f4e0c72d9eb1a2
     }
     }
     onMouseEnter(){}
@@ -88,14 +48,8 @@ class DrawingNormal extends PaintFunction{
     onDblclick(coord,event){
     }
 
-<<<<<<< HEAD
-
-    onMouseLeave(coord,event){
-        //this.reset();
-=======
     onClick(coord,event){
 
->>>>>>> f9715428203462c60f669ffd31f4e0c72d9eb1a2
     }
 }
     

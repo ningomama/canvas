@@ -32,12 +32,9 @@ class DrawingCircle extends PaintFunction{
             canvasPush();
         }
     }
-<<<<<<< HEAD
-=======
 
 
     
->>>>>>> f9715428203462c60f669ffd31f4e0c72d9eb1a2
     drawCircle(drawTarget , coord){ 
         //setting
         drawTarget.strokeStyle = strokeBrush.color;
