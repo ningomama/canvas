@@ -4,13 +4,6 @@ class DrawingNormal extends PaintFunction{
         this.ctx = contextReal;
         this.endDrawing = false;
     }
-<<<<<<< HEAD
-    // draws out all the points
-    finishGraphic(){
-        if(this.endDrawing){
-            this.draw(this.contextReal,null);
-        }
-=======
 
     onMouseDown(coord, event){
         this.ctx.strokeStyle = strokeBrush.color;
@@ -21,7 +14,6 @@ class DrawingNormal extends PaintFunction{
         this.ctx.moveTo(coord[0],coord[1]);
         this.draw(coord[0],coord[1]);
         this.endDrawing = false;
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
     }
 
     onDragging(coord,event){
@@ -36,21 +28,8 @@ class DrawingNormal extends PaintFunction{
     onMouseLeave(){
         if(!this.endDrawing) {
             canvasPush();
-<<<<<<< HEAD
-            
-            //currentFunction.onMouseUp(coord);
-        }
-        this.drawing = true;
-    }
-    
-    onDragging(coord,event){
-        if (!this.endDrawing){
-            this.points.push(coord);
-        }
-=======
         this.endDrawing = true;
     }
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
     }
     onMouseEnter(){}
 
@@ -60,43 +39,17 @@ class DrawingNormal extends PaintFunction{
         this.ctx.closePath();
         this.ctx.stroke();
     }
-<<<<<<< HEAD
-    onMouseUp(coord){
-        if(!this.endDrawing){
-            //calculateGraphicAreaSize(this.points);
-            this.endDrawing = true;
-            //graphicArea.enable = true;
-        }
-        this.onMouseDown(coord,event);
-        this.drawing = false;
-=======
     reset(){
         this.endDrawing = false;
         this.points = [];
         this.ctx.clearRect(0,0,canvasDraft.width,canvasDraft.height);
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
     }
 
     onDblclick(coord,event){
     }
 
-<<<<<<< HEAD
-
-    onMouseLeave(coord,event){
-        if(this.drawing){
-            //calculateGraphicAreaSize(this.points);
-            //graphicArea.enable = true;
-            this.endDrawing = true;
-            this.onMouseDown(coord,event);
-            this.drawing = false;
-            // canvasPush();
-        }
-        // this.reset();
-        // currentFunction = new DrawingNormal(contextReal,contextDraft);
-=======
     onClick(coord,event){
 
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
     }
 }
     

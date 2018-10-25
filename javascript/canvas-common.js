@@ -31,11 +31,7 @@ $('#canvas-draft').mousemove(function(e){
    
    let mouseX = e.offsetX;
    let mouseY = e.offsetY;
-<<<<<<< HEAD
-//    console.log(mouseX,mouseY);
-=======
    //clear canvasDraft first and redraw everying later
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
    contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
    //if end drawing ,graphicArea.enable will set to true in other class function
    if (graphicArea.enable){

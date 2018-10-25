@@ -1,73 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Doodle Doo</title>
 
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
         integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-        <link href="style.css" rel="stylesheet" type='text/css'>
-    </head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type='text/css'>
+</head>
 
-    <body>
-        
-       
-        <div id="canvas-container">  
+<body>
 
-                <div class="control"> 
-                        <div class="fa fa-paint-brush" id="clear-canvas">Clear</div>
-                        <div title="undo" id="undo"><i class="fas fa-undo-alt"></i></div>
-                        <div title ="redo" id="redo"><i class="fas fa-redo-alt"></i></div>
-                        <a href="#" id="btn-download" download="my-drawing.png"><div class="fa fa-paint-brush">Save</div></a>
-                </div>
-    
-            <!-- canvas section -->           
-            <canvas id="canvas-real" class="canvas" width='960px' height='540px'></canvas>
-            <canvas id="canvas-draft" class="canvas" width='960px' height='540px' usemap="#planetmap"></canvas>
-            <map name="planetmap">
-                <area id='top-left'  shape="rect" coords="0,0,10,10"  >
-                <area id='top-right'  shape="rect" coords="0,0,10,10"  >
-                <area id='bottom-left'  shape="rect" coords="0,0,10,10"  >
-                <area id='bottom-right'  shape="rect" coords="0,0,10,10"  >
-            </map>
-        
+
+    <div id="canvas-container">
+
+        <div class="control">
+            <div class="fa fa-paint-brush" id="clear-canvas">Clear</div>
+            <div title="undo" id="undo"><i class="fas fa-undo-alt"></i></div>
+            <div title="redo" id="redo"><i class="fas fa-redo-alt"></i></div>
+            <a href="#" id="btn-download" download="my-drawing.png">
+                <div class="fa fa-paint-brush">Save</div>
+            </a>
+        </div>
+
+        <!-- canvas section -->
+        <canvas id="canvas-real" class="canvas" width='960px' height='540px'></canvas>
+        <canvas id="canvas-draft" class="canvas" width='960px' height='540px' usemap="#planetmap"></canvas>
+        <map name="planetmap">
+            <area id='top-left' shape="rect" coords="0,0,10,10">
+            <area id='top-right' shape="rect" coords="0,0,10,10">
+            <area id='bottom-left' shape="rect" coords="0,0,10,10">
+            <area id='bottom-right' shape="rect" coords="0,0,10,10">
+        </map>
+
 
         <!-- tool-bar for shapes, brush, color and eraser -->
         <div id="tool-bar">
-           
+
             <div class="tool-plate hide">
-                <div class="tool-slide"><div>0</div> <input title="Opacity" type="range" id="opacity" min="0" max="10" value="10">
-                <div >100%</div></div>
-                <div class="colorbox">
-                    <div><i class="fas fa-pencil-alt"></i></div> <div><input title="Brush color" type="color" class="line-color" id="color-picker"></div>
-                    <div title="no color"class="nofill" id="l-nofill"></div>
+                <div class="tool-slide">
+                    <div>0</div> <input title="Opacity" type="range" id="opacity" min="0" max="10" value="10">
+                    <div>100%</div>
                 </div>
                 <div class="colorbox">
-                    <div><i class="fas fa-fill-drip"></i></div> <div><input title="Fill color" type="color" class="fill-color" id="color-picker"></div>
+                    <div><i class="fas fa-pencil-alt"></i></div>
+                    <div><input title="Brush color" type="color" class="line-color" id="color-picker"></div>
+                    <div title="no color" class="nofill" id="l-nofill"></div>
+                </div>
+                <div class="colorbox">
+                    <div><i class="fas fa-fill-drip"></i></div>
+                    <div><input title="Fill color" type="color" class="fill-color" id="color-picker"></div>
                     <div title="no color" class="nofill" id="f-nofill"></div>
                 </div>
-                
+
             </div>
             <div title="SHAPES" class="tool-plate hide">
-                <div class="tool-icon"><i title="Rectangle" class="far fa-square fa-2x" id="drawing-rectangle" ></i></div>
+                <div class="tool-icon"><i title="Rectangle" class="far fa-square fa-2x" id="drawing-rectangle"></i></div>
                 <div class="tool-icon"><i title="Ruler" class="fas fa-ruler fa-2x" id="drawing-line"></i></div>
                 <div class="tool-icon"><i title="Circle" class="far fa-circle fa-2x" id="drawing-circle"></i> </div>
                 <div class="tool-icon"><i title="Polygon" class="fas fa-draw-polygon fa-2x" id="drawing-polygon"></i></div>
             </div>
             <div class="tool-plate hide">
-                <div class="tool-slide"><div>0</div><input title="brush-width" type="range" id="brush-width" min="1" max="50" value="10"><div>50</div></div>
+                <div class="tool-slide">
+                    <div>0</div><input title="brush-width" type="range" id="brush-width" min="1" max="50" value="10">
+                    <div>50</div>
+                </div>
                 <div class="tool-icon"><i title="Pen" class="fas fa-pencil-alt fa-2x" id="drawing-normal"></i></div>
                 <div class="tool-icon"><i title="Pom pom" class="fas fa-certificate fa-2x" id="worm"></i></div>
-                <div class="tool-icon"><i title= "Wire" class="fa fa-paint-brush" id="wire" ><br>Wire</i></div>
+                <div class="tool-icon"><i title="Wire" class="fa fa-paint-brush" id="wire"><br>Wire</i></div>
                 <div class="tool-icon"><i title="Spray" class="fas fa-spray-can fa-2x" id="spray"></i></div>
-                
+
             </div>
             <div class="tool-plate hide">
                 <div class="tool-icon"><i title="Eraser" class="fas fa-eraser fa-3x" id="wipe"></i></div>
@@ -75,100 +86,61 @@
             <div class="tool-plate hide">
                 <div class="tool-icon"><i title="text" class="fas fa-font fa-3x" id="drawing-text"></i></div>
             </div>
-         <div id="tool-box"><i class="fas fa-box fa-10x"></i></div>
+            <div id="tool-box"><i class="fas fa-box fa-10x"></i></div>
         </div>
-       
-        </div>
-        
+
+    </div>
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script type='text/javascript' src="./javascript/canvas-common.js"></script>
-        <script type='text/javascript' src="./javascript/editDrawingArea.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-line.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-rectangle.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-text.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-normal.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
-        <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
-        <script type='text/javascript' src="./javascript/Wipe.js"></script>
-        <script type='text/javascript' src="./javascript/brush.js"></script>
-        <script type='text/javascript' src="./javascript/SprayPaint.js"></script>
-        <script type='text/javascript' src="./javascript/artbrush.js"></script>
-        <script type='text/javascript' src="./javascript/uiux.js"></script>
-        <script type='text/javascript' src="./javascript/undo-redo.js"></script>
-        <script type='text/javascript' src="./javascript/save-btn.js"></script>
-        <script type='text/javascript'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type='text/javascript' src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script type='text/javascript' src="./javascript/canvas-common.js"></script>
+    <script type='text/javascript' src="./javascript/editDrawingArea.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-line.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-rectangle.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-text.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-normal.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
+    <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
+    <script type='text/javascript' src="./javascript/Wipe.js"></script>
+    <script type='text/javascript' src="./javascript/brush.js"></script>
+    <script type='text/javascript' src="./javascript/SprayPaint.js"></script>
+    <script type='text/javascript' src="./javascript/artbrush.js"></script>
+    <script type='text/javascript' src="./javascript/uiux.js"></script>
+    <script type='text/javascript' src="./javascript/undo-redo.js"></script>
+    <script type='text/javascript' src="./javascript/save-btn.js"></script>
+    <script type='text/javascript'>
 
         $(function () {
-<<<<<<< HEAD
-            // var funqueue = [];
-
-            // var canvas = document.getElementById('canvas-real');
-            /*
-            if (canvas.getContext){
-                var ctx = canvas.getContext('2d');
-
-                ctx.beginPath();
-                ctx.moveTo(50,50);
-                ctx.lineTo(100,100);
-                ctx.lineTo(100,50);
-                
-                ctx.lineTo(50,100);
-                ctx.fill();
-            }
-            
-
-            function dragWithCustomImage(event) {
-                var canvas = document.createElementNS("http://www.w3.org/1999/xhtml","canvas");
-                canvas.width = canvas.height = 50;
-
-                var ctx = canvas.getContext("2d");
-                ctx.lineWidth = 4;
-                ctx.moveTo(0, 0);
-                ctx.lineTo(50, 50);
-                ctx.moveTo(0, 50);
-                ctx.lineTo(50, 0);
-                ctx.stroke();
-
-                var dt = event.dataTransfer;
-                dt.setData('text/plain', 'Data to Drag');
-                dt.setDragImage(canvas, 25, 25);
-            }
-            */
-
-
-=======
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
             $('#drawing-rectangle').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
-                currentFunction = new DrawingRectangle(contextReal,contextDraft);
+                currentFunction = new DrawingRectangle(contextReal, contextDraft);
             });
             $('#drawing-line').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
-                currentFunction = new DrawingLine(contextReal,contextDraft);
+                currentFunction = new DrawingLine(contextReal, contextDraft);
             });
-            $('#spray').click(()=>{
+            $('#spray').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
                 currentFunction = new SprayPaint(contextReal);
             });
 
-            $('#wire').click(()=>{
+            $('#wire').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
-                currentFunction = new ArtBrush(contextReal,10,1,5);
+                currentFunction = new ArtBrush(contextReal, 10, 1, 5);
             });
 
-            $('#worm').click(()=>{
+            $('#worm').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
-                currentFunction = new ArtBrush(contextReal,20,32,5);
+                currentFunction = new ArtBrush(contextReal, 20, 32, 5);
             });
 
             $('#drawing-text').click(() => {
@@ -176,29 +148,29 @@
                     // //need to maintain
                     // currentFunction.drawLine(currentFunction.contextReal,null);
                 }
-                currentFunction = new DrawingText(contextReal,contextDraft);
+                currentFunction = new DrawingText(contextReal, contextDraft);
                 graphicArea.reset();
                 needFinishGraphic();
             });
             $('#drawing-normal').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
-                currentFunction = new DrawingNormal(contextReal,contextDraft);
+                currentFunction = new DrawingNormal(contextReal, contextDraft);
             });
             $('#drawing-circle').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
-                currentFunction = new DrawingCircle(contextReal,contextDraft);
+                currentFunction = new DrawingCircle(contextReal, contextDraft);
             });
             $('#drawing-polygon').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
-                currentFunction = new DrawingPolygon(contextReal,contextDraft);
+                currentFunction = new DrawingPolygon(contextReal, contextDraft);
             });
             $('#wipe').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
-                currentFunction = new Wipe(contextReal,contextDraft);
+                currentFunction = new Wipe(contextReal, contextDraft);
             });
             $('#clear-canvas').click(() => {
                 graphicArea.reset();
@@ -215,9 +187,9 @@
 
                 canvasPush();
             });
-            currentFunction = new DrawingNormal(contextReal,contextDraft);    
-            
-            function needFinishGraphic(){
+            currentFunction = new DrawingNormal(contextReal, contextDraft);
+
+            function needFinishGraphic() {
                 //call the finishGraphic() function and save the picture into canvasArray
                 // finishGraphic() will draw the graphic to the realcanvas if the drawing is finish
                 //but some class e.g Wipe , SprayPaint , ArtBrush 
@@ -235,11 +207,11 @@
                     case currentFunction instanceof DrawingNormal:
                         break;
                     default:
-                        if(currentFunction.endDrawing){
+                        if (currentFunction.endDrawing) {
                             currentFunction.finishGraphic();
                             canvasPush();
                         }
-                        
+
                         break;
                 }
             }

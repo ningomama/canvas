@@ -76,10 +76,10 @@ input[type=range]{
     justify-content: space-around;
     box-shadow: 2px 2px 5px #000;
 }
-/* 
+
 .hide{
     display:none;
-} */
+}
 
 .tool-slide{
     display: flex;

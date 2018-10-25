@@ -26,17 +26,10 @@ class SprayPaint extends PaintFunction{
         canvasPush();
     }
     onMouseLeave(){
-<<<<<<< HEAD
-        if (!this.endDrawing) {
-            this.endDrawing = true;
-            canvasPush();
-        }
-=======
         if(!this.endDrawing) {
             canvasPush();
         this.endDrawing = true;
     }
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
     }
     onMouseEnter(){}
 

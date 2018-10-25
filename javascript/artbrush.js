@@ -28,16 +28,6 @@ class ArtBrush extends PaintFunction{
         this.endDrawing = true;
         canvasPush();
     }
-<<<<<<< HEAD
-    onMouseLeave(){
-        if(!this.endDrawing) {
-            this.endDrawing = true;
-            canvasPush();
-        };
-
-    }
-    onMouseEnter(){}
-=======
 
     onMouseLeave(){
         if(!this.endDrawing) {
@@ -46,7 +36,6 @@ class ArtBrush extends PaintFunction{
     }
     }
     onMouseEnter(){ }
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
 
     getRandomOffset(radius) {
         var random_angle = Math.random() * (2*Math.PI);

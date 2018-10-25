@@ -51,11 +51,7 @@ function isPointInGraphicArea(mousePoint){
       }
 }
 function resetGraphicAreaTwoPoints(){
-<<<<<<< HEAD
-      // extreme values set so that GraphicArea will be able to target min max values
-=======
       //reset the edit GraphicArea topLeftPoint and bottomRightPoint because we need to calculate the new Graphic
->>>>>>> 8cd65c83f5f6ea5abe94cad1262f2bb1bf38ffc6
       graphicArea.topLeftPoint = [99999,99999];
       graphicArea.bottomRightPoint = [-10000,-10000];
 }
