@@ -48,7 +48,7 @@ class DrawingText extends PaintFunction{
         this.contextReal.font = `${this.fontsize} Arial`;
         this.contextReal.fillText(textInput,this.origX,this.origY);
         $('#'+ textCount).css({visibility:"hidden", position:"fixed", top: 0, left: 0});
-    
+        canvasPush();
     };
 
 

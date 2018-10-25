@@ -65,7 +65,7 @@
                 <div class="tool-slide"><div>0</div><input title="brush-width" type="range" id="brush-width" min="1" max="50" value="10"><div>50</div></div>
                 <div class="tool-icon"><i title="Pen" class="fas fa-pencil-alt fa-2x" id="drawing-normal"></i></div>
                 <div class="tool-icon"><i title="Pom pom" class="fas fa-certificate fa-2x" id="worm"></i></div>
-                <div class="tool-icon"><i title= "Wire" class="fa fa-paint-brush" id="wire" >Wire</i></div>
+                <div class="tool-icon"><i title= "Wire" class="fa fa-paint-brush" id="wire" ><br>Wire</i></div>
                 <div class="tool-icon"><i title="Spray" class="fas fa-spray-can fa-2x" id="spray"></i></div>
                 
             </div>
@@ -232,6 +232,8 @@
                     case currentFunction instanceof ArtBrush:
                         break;
                     case currentFunction instanceof DrawingText:
+                        break;
+                    case currentFunction instanceof DrawingNormal:
                         break;
                     default:
                         if(currentFunction.endDrawing){
