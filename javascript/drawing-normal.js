@@ -71,7 +71,15 @@ class DrawingNormal extends PaintFunction{
     }
 
 
-    onMouseLeave(){}
+    onMouseLeave(coord,event){
+        if(!this.endDrawing){
+            //calculateGraphicAreaSize(this.points);
+            this.endDrawing = true;
+            //graphicArea.enable = true;
+        }
+        this.onMouseDown(coord,event);
+
+    }
     onMouseEnter(){}
 
     onClick(coord,event){
