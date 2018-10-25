@@ -27,6 +27,7 @@ $('#canvas-draft').mousemove(function(e){
    
    let mouseX = e.offsetX;
    let mouseY = e.offsetY;
+//    console.log(mouseX,mouseY);
    contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
    if (graphicArea.enable){
       drawGraphicAreaInDraft();
@@ -51,11 +52,7 @@ $('#canvas-draft').mouseup(function(e){
     let mouseY = e.offsetY;
     currentFunction.onMouseUp([mouseX,mouseY],e);
 
-<<<<<<< HEAD
-    // canvasPush();
-=======
     //canvasPush();
->>>>>>> 0a4d601180efcaac5ac72ca4c92e74a3a8083ef3
 });
 
 //need to modify in future

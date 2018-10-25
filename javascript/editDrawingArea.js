@@ -42,6 +42,7 @@ let graphicArea = new editDrawingArea();
 
 
 function isPointInGraphicArea(mousePoint){
+      // acts like a net to check if mouse points lie within catchment area
       if (graphicArea.topLeftPointWithMargin[0] <= mousePoint[0] && graphicArea.topLeftPointWithMargin[1] <= mousePoint[1] &&
             graphicArea.bottomRightPointWithMargin[0] >= mousePoint[0] && graphicArea.bottomRightPointWithMargin[1] >= mousePoint[1]){
             return true;
@@ -50,6 +51,7 @@ function isPointInGraphicArea(mousePoint){
       }
 }
 function resetGraphicAreaTwoPoints(){
+      // extreme values set so that GraphicArea will be able to target min max values
       graphicArea.topLeftPoint = [99999,99999];
       graphicArea.bottomRightPoint = [-10000,-10000];
 }

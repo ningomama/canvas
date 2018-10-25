@@ -5,6 +5,7 @@ class SprayPaint extends PaintFunction{
     }
 
     onMouseDown(coord, event){
+        this.endDrawing = false;
         this.ctx.fillStyle = strokeBrush.color;
         let w = this.ctx.lineWidth = strokeBrush.width;
         this.ctx.beginPath();
@@ -19,9 +20,15 @@ class SprayPaint extends PaintFunction{
 
     onMouseMove(){}
     onMouseUp(){
+        this.endDrawing = true;
         canvasPush();
     }
-    onMouseLeave(){}
+    onMouseLeave(){
+        if (!this.endDrawing) {
+            this.endDrawing = true;
+            canvasPush();
+        }
+    }
     onMouseEnter(){}
 
     onDblclick(coord,event){

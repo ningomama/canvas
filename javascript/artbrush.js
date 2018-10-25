@@ -8,6 +8,7 @@ class ArtBrush extends PaintFunction{
     }
 
     onMouseDown(coord, event){
+        this.endDrawing = false;
         this.ctx.strokeStyle = strokeBrush.color;
         this.ctx.fillStyle = strokeBrush.color;
         this.ctx.lineWidth = this.thickness;
@@ -21,8 +22,17 @@ class ArtBrush extends PaintFunction{
     }
 
     onMouseMove(){}
-    onMouseUp(){canvasPush();}
-    onMouseLeave(){}
+    onMouseUp(){
+        this.endDrawing = true;
+        canvasPush();
+    }
+    onMouseLeave(){
+        if(!this.endDrawing) {
+            this.endDrawing = true;
+            canvasPush();
+        };
+
+    }
     onMouseEnter(){}
 
     getRandomOffset(radius) {

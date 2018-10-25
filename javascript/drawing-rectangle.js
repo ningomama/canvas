@@ -119,8 +119,8 @@ class DrawingRectangle extends PaintFunction{
    handleGraphicMove(point){
       let xDiff = point[0]-previousMousePosition[0];
       let yDiff = point[1]-previousMousePosition[1];
-      //console.log("point[0]"+point[0]);
-      //console.log("previousMousePosition[0]"+previousMousePosition[0]);
+    //   console.log("point[0]"+point[0]);
+    //   console.log("previousMousePosition[0]"+previousMousePosition[0]);
       for(let i=0 ; i< this.points.length ;i++){
           this.points[i][0] += xDiff;
           this.points[i][1] += yDiff;
