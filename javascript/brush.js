@@ -12,12 +12,12 @@ let fillBrush = {
 $('.line-color').on('input', function () {
     strokeBrush.color = this.value;
     console.log(strokeBrush.color);
-    alert('.line-color change');
+    //alert('.line-color change');
 });
 
 $('.fill-color').on('input', function () {
     fillBrush.color = this.value;
-    alert('.fill-color change');
+    //alert('.fill-color change');
 });
 
 $('#brush-width').on('input', function () {

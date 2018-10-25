@@ -39,6 +39,7 @@ class DrawingNormal extends PaintFunction{
             this.finishGraphic();
             currentFunction = new DrawingNormal(contextReal,contextDraft);
             canvasPush();
+            
             //currentFunction.onMouseUp(coord);
         }
     }
@@ -71,7 +72,15 @@ class DrawingNormal extends PaintFunction{
     }
 
 
-    onMouseLeave(){}
+    onMouseLeave(coord,event){
+        if(!this.endDrawing){
+            //calculateGraphicAreaSize(this.points);
+            this.endDrawing = true;
+            //graphicArea.enable = true;
+        }
+        this.onMouseDown(coord,event);
+
+    }
     onMouseEnter(){}
 
     onClick(coord,event){
