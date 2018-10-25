@@ -12,6 +12,7 @@ class DrawingNormal extends PaintFunction{
         this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
         console.log("reset()");
     }
+
     finishGraphic(){
         if(this.endDrawing){
             this.draw(this.contextReal, this.contextDraft);
@@ -37,6 +38,8 @@ class DrawingNormal extends PaintFunction{
             graphicArea.reset();
             this.finishGraphic();
             currentFunction = new DrawingNormal(contextReal,contextDraft);
+            canvasPush();
+            
             //currentFunction.onMouseUp(coord);
         }
     }
@@ -56,17 +59,27 @@ class DrawingNormal extends PaintFunction{
             this.endDrawing = true;
             //graphicArea.enable = true;
         }
+        this.onMouseDown(coord,event);
     }
     onDblclick(coord,event){
         if(isPointInGraphicArea(coord)){
             graphicArea.reset();
             this.finishGraphic();
-            currentFunction = new DrawingNormal(contextReal);
+            currentFunction = new DrawingNormal(contextReal,contextDraft);
+            canvasPush();
         }
     }
 
 
-    onMouseLeave(){}
+    onMouseLeave(coord,event){
+        if(!this.endDrawing){
+            //calculateGraphicAreaSize(this.points);
+            this.endDrawing = true;
+            //graphicArea.enable = true;
+        }
+        this.onMouseDown(coord,event);
+
+    }
     onMouseEnter(){}
 
     onClick(coord,event){

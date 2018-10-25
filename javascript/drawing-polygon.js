@@ -10,7 +10,6 @@ class DrawingPolygon extends PaintFunction{
        if(this.endDrawing){
         this.drawPolygon(this.contextReal,null);
        }
-    
     }
     reset(){
         this.firstPoint = true;
@@ -78,6 +77,7 @@ class DrawingPolygon extends PaintFunction{
                 graphicArea.enable = false;
                 this.drawPolygon(this.contextReal , null);
                 currentFunction = new DrawingPolygon(contextReal,contextDraft);
+                canvasPush();
                 //currentFunction.onClick(coord , null);
             }
             //alert('endDrawing');
@@ -112,6 +112,7 @@ class DrawingPolygon extends PaintFunction{
             graphicArea.reset();
             this.drawPolygon(this.contextReal , null);
             currentFunction = new DrawingPolygon(contextReal,contextDraft);
+            canvasPush();
         }else if(this.endDrawing){
             this.onClick(coord,null);
         }

@@ -21,7 +21,7 @@ class ArtBrush extends PaintFunction{
     }
 
     onMouseMove(){}
-    onMouseUp(){}
+    onMouseUp(){canvasPush();}
     onMouseLeave(){}
     onMouseEnter(){}
 

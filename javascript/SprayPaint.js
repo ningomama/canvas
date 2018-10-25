@@ -18,7 +18,9 @@ class SprayPaint extends PaintFunction{
     }
 
     onMouseMove(){}
-    onMouseUp(){}
+    onMouseUp(){
+        canvasPush();
+    }
     onMouseLeave(){}
     onMouseEnter(){}
 
@@ -45,10 +47,8 @@ class SprayPaint extends PaintFunction{
          
         for (var i = 0; i < density; i++) {
             var offset = this.getRandomOffset(w);
-             
             x = x + offset.x;
             y = y + offset.y;
-             
             this.ctx.fillRect(x, y, 1, 1);
         }
     };

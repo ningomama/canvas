@@ -234,7 +234,11 @@
                     case currentFunction instanceof DrawingText:
                         break;
                     default:
-                        currentFunction.finishGraphic();
+                        if(currentFunction.endDrawing){
+                            currentFunction.finishGraphic();
+                            canvasPush();
+                        }
+                        
                         break;
                 }
             }

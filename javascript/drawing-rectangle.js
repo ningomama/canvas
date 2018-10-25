@@ -32,6 +32,7 @@ class DrawingRectangle extends PaintFunction{
         graphicArea.enable = false;
         this.drawRectangle(this.contextReal , null);
         currentFunction = new DrawingRectangle(contextReal,contextDraft);
+        canvasPush();
     }
       /*
        this.contextDraft.fillStyle = "#f44";
@@ -52,6 +53,7 @@ class DrawingRectangle extends PaintFunction{
             graphicArea.enable = false;
             this.drawRectangle(this.contextReal , null);
             currentFunction = new DrawingRectangle(contextReal,contextDraft);
+            canvasPush();
             //currentFunction.onMouseUp(coord);
          }
       }else if(this.firstPoint){
@@ -85,6 +87,7 @@ class DrawingRectangle extends PaintFunction{
             graphicArea.reset();
             this.drawRectangle(this.contextReal , null);
             currentFunction = new DrawingRectangle(contextReal,contextDraft);
+            canvasPush();
         }
     }
 
