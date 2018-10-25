@@ -21,7 +21,7 @@ class DrawingCircle extends PaintFunction{
     onDblclick(coord,event){
         if(this.endDrawing && isPointInGraphicArea(coord)){
             graphicArea.reset();
-            this.drawCircle(this.contextReal , null);
+            currentFunction.drawCircle(this.contextReal , null);
             currentFunction = new DrawingCircle(contextReal,contextDraft);
             canvasPush();
         }

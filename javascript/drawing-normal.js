@@ -39,6 +39,7 @@ class DrawingNormal extends PaintFunction{
             this.finishGraphic();
             currentFunction = new DrawingNormal(contextReal,contextDraft);
             canvasPush();
+            
             //currentFunction.onMouseUp(coord);
         }
     }
