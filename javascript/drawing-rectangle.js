@@ -87,9 +87,12 @@ class DrawingRectangle extends PaintFunction{
     }
 
    drawRectangle(drawTarget , coord){ 
+    drawTarget.globalAlpha = strokeBrush.opacity;
     drawTarget.strokeStyle = strokeBrush.color;
     drawTarget.lineWidth = strokeBrush.width;
     drawTarget.fillStyle = fillBrush.color;
+    
+   
       switch(true){
          case (this.points.length==1):
             if (getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1], coord)  >= minDrawLength){
