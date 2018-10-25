@@ -10,8 +10,12 @@ contextReal.fillStyle = '#fff';
 contextReal.fillRect(0, 0, contextReal.canvas.width, contextReal.canvas.height);
 
 let previousMousePosition;
-let sensitivity = 3.5;
-let minDrawLength = 3;
+//for draw polygon (check the mouse point and the first point click of the polygon, if nearly mouse point , mouse point position = first point )
+let sensitivity = 3.5; 
+//when the mouse fast move and stay and click but the var (dragging) also true
+//will draw a zero length object and will also show edit Drawing Area
+//so need to have the min draw length to avoid the bug
+let minDrawLength = 3; 
 
 $('#canvas-draft').mousedown(function(e){
     let mouseX = e.offsetX;
@@ -27,11 +31,14 @@ $('#canvas-draft').mousemove(function(e){
    
    let mouseX = e.offsetX;
    let mouseY = e.offsetY;
+   //clear canvasDraft first and redraw everying later
    contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
+   //if end drawing ,graphicArea.enable will set to true in other class function
    if (graphicArea.enable){
       drawGraphicAreaInDraft();
    }
    if(dragging){
+       // handle edit Graphic Area and object move if edit Graphic Area is show and mouse point in edit Graphic Area. 
       if (graphicArea.enable && isPointInGraphicArea(previousMousePosition)){
          handleGraphicAreaMove([mouseX,mouseY]);
          currentFunction.handleGraphicMove([mouseX,mouseY]);
@@ -39,6 +46,7 @@ $('#canvas-draft').mousemove(function(e){
       currentFunction.onDragging([mouseX,mouseY],e);
    }
    currentFunction.onMouseMove([mouseX,mouseY],e);
+   //save the previousMousePosition.
    previousMousePosition = [mouseX, mouseY];
    
 });
@@ -77,10 +85,11 @@ $('#canvas-draft').mouseenter(function(e){
     currentFunction.onMouseEnter([mouseX,mouseY],e);
 });
 
+
 var timer = 0;
 var delay = 200;
 var prevent = false;
-
+// handle the click and double click function
 $("#canvas-draft")
 .on("click", function(e) {
    timer = setTimeout(function() {
@@ -102,13 +111,14 @@ $("#canvas-draft")
 
 
 class PaintFunction{
-   constructor(){
-      graphicArea.reset();
-   }
-   onMouseDown(){}
-   onDragging(){}
-   onMouseMove(){}
-   onMouseUp(){}
-   onMouseLeave(){}
-   onMouseEnter(){}
+    constructor(){
+        //will reset and hide edit graphic Area
+        graphicArea.reset();
+    }
+    onMouseDown(){}
+    onDragging(){}
+    onMouseMove(){}
+    onMouseUp(){}
+    onMouseLeave(){}
+    onMouseEnter(){}
 }

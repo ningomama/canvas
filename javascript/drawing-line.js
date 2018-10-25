@@ -18,9 +18,12 @@ class DrawingLine extends PaintFunction{
 
     onMouseDown(coord,event){
         //need to be bug fix (not push!!!!!!)
+        // if already draw a line and mouse is not in edit Graphic Area,
+        // hide edit graphic Area
+        // draw line to real canvas and new DrawingLine
+        // save canvas
         if(!isPointInGraphicArea(coord) && this.endDrawing){
             graphicArea.enable = false;
-            // need
             this.drawLine(this.contextReal , null);
             currentFunction = new DrawingLine(contextReal,contextDraft);
             canvasPush();
@@ -28,6 +31,7 @@ class DrawingLine extends PaintFunction{
         }
     }
     onDragging(coord,event){
+        //will set the first click point if click the first point
         if(this.firstPoint){
             this.points[0] = [coord[0],coord[1]];
             this.firstPoint = false;
@@ -35,10 +39,17 @@ class DrawingLine extends PaintFunction{
     }
 
     onMouseMove(coord){
+        // draw the line in every MouseMove
         this.drawLine(this.contextDraft,coord);
     }
     onMouseUp(coord){
+        //when dragging before and drawing is not end before
         if (!this.firstPoint && !this.endDrawing){
+            //if user draw a too small circle {
+            //  reset the setting (cancle user input) 
+            //}else{
+            //  calculateGraphicAreaSize() and show graphicArea   
+            //}
             if (getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1], coord)  < minDrawLength){
                 this.reset();
             }else{
@@ -56,6 +67,10 @@ class DrawingLine extends PaintFunction{
     onClick(coord,event){
     }
     onDblclick(coord,event){
+        //if finish drawing and double click in edit GraphicArea
+        //1.reset and hide the edit graphic Area and draw the graphic to real canvas if in the edit graphic Area and 
+        //2.draw the graphic to real canvas
+        //3.push canvasPush
         if(this.endDrawing && isPointInGraphicArea(coord)){
             graphicArea.enable = false;
             this.drawLine(this.contextReal , null);
@@ -65,25 +80,32 @@ class DrawingLine extends PaintFunction{
     }
 
     drawLine(drawTarget , coord){ 
+        //setting
         drawTarget.strokeStyle = strokeBrush.color;
         drawTarget.lineWidth = strokeBrush.width;
 
         if(this.points.length>0){
+            //start
             drawTarget.beginPath();
         }
+        // if only click first point
         if(this.points.length==1){
+            // check if the the first click point and mouse point is >= minDrawLength , draw if yes
             if (getDistinctFromStartPointToEndPoint( this.points[0][0],this.points[0][1], coord) >= minDrawLength ){
                 drawTarget.moveTo(this.points[0][0],this.points[0][1]);
                 drawTarget.lineTo(coord[0],coord[1]);
             }
         }
+        // if click two points
         if(this.points.length >= 2){
+            // check if the the two click point length is >= minDrawLength , draw if yes
             if (getDistinctFromStartPointToEndPoint( this.points[0][0],this.points[0][1], this.points[1]) >= minDrawLength){
                 drawTarget.moveTo(this.points[0][0],this.points[0][1]);
                 drawTarget.lineTo(this.points[1][0],this.points[1][1]);
             }
         }
         if(this.points.length>0){
+            //end the line
             drawTarget.closePath();
             drawTarget.stroke();
         }

@@ -102,43 +102,6 @@
         <script type='text/javascript'>
 
         $(function () {
-            var funqueue = [];
-
-
-            var canvas = document.getElementById('canvas-real');
-            /*
-            if (canvas.getContext){
-                var ctx = canvas.getContext('2d');
-
-                ctx.beginPath();
-                ctx.moveTo(50,50);
-                ctx.lineTo(100,100);
-                ctx.lineTo(100,50);
-                
-                ctx.lineTo(50,100);
-                ctx.fill();
-            }
-            
-
-            function dragWithCustomImage(event) {
-                var canvas = document.createElementNS("http://www.w3.org/1999/xhtml","canvas");
-                canvas.width = canvas.height = 50;
-
-                var ctx = canvas.getContext("2d");
-                ctx.lineWidth = 4;
-                ctx.moveTo(0, 0);
-                ctx.lineTo(50, 50);
-                ctx.moveTo(0, 50);
-                ctx.lineTo(50, 0);
-                ctx.stroke();
-
-                var dt = event.dataTransfer;
-                dt.setData('text/plain', 'Data to Drag');
-                dt.setDragImage(canvas, 25, 25);
-            }
-            */
-
-
             $('#drawing-rectangle').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
@@ -149,27 +112,19 @@
                 needFinishGraphic();
                 currentFunction = new DrawingLine(contextReal,contextDraft);
             });
-
             $('#spray').click(()=>{
-                if (currentFunction.endDrawing){
-                    
-                }
                 graphicArea.reset();
                 needFinishGraphic();
                 currentFunction = new SprayPaint(contextReal);
             });
 
             $('#wire').click(()=>{
-                if (currentFunction.endDrawing){
-                }
                 graphicArea.reset();
                 needFinishGraphic();
                 currentFunction = new ArtBrush(contextReal,10,1,5);
             });
 
             $('#worm').click(()=>{
-                if (currentFunction.endDrawing){
-                }
                 graphicArea.reset();
                 needFinishGraphic();
                 currentFunction = new ArtBrush(contextReal,20,32,5);
@@ -221,12 +176,19 @@
             currentFunction = new DrawingNormal(contextReal,contextDraft);    
             
             function needFinishGraphic(){
+                //call the finishGraphic() function and save the picture into canvasArray
+                // finishGraphic() will draw the graphic to the realcanvas if the drawing is finish
+                //but some class e.g Wipe , SprayPaint , ArtBrush 
+                //those have no finishGraphic and will call canvasPush() inside the class
+                //so check the currentFunction and consider will call finishGraphic() and canvasPush() or not
                 switch (true) {
                     case currentFunction instanceof Wipe:
                         break;
                     case currentFunction instanceof SprayPaint:
                         break;
                     case currentFunction instanceof ArtBrush:
+                        break;
+                    case currentFunction instanceof DrawingNormal:
                         break;
                     default:
                         if(currentFunction.endDrawing){
@@ -237,6 +199,7 @@
                         break;
                 }
             }
+            //push the blank picture first into the canvasArray in the start
             canvasPush();
         })
 

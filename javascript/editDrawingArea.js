@@ -50,6 +50,7 @@ function isPointInGraphicArea(mousePoint){
       }
 }
 function resetGraphicAreaTwoPoints(){
+      //reset the edit GraphicArea topLeftPoint and bottomRightPoint because we need to calculate the new Graphic
       graphicArea.topLeftPoint = [99999,99999];
       graphicArea.bottomRightPoint = [-10000,-10000];
 }
@@ -164,7 +165,7 @@ function getDistinctFromStartPointToEndPoint( startX , startY , coord ){
       return Math.sqrt( (XPointDiff+YPointDiff) );
 }
 
-//where to use it?
+//use it into the rectangle class to calculate the horizontal and vertical size the rectangle is!!(you can't set rectangle vertical size is -100)
 function calculateLengthAbsolute( point1, point2){
    return Math.abs(point1-point2);
 }

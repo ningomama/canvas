@@ -70,10 +70,6 @@ class DrawingRectangle extends PaintFunction{
         }
          
       }
-      //can store function in array!!!!
-      //var funqueue = [];
-      //funqueue.push(this.contextReal.fillRect(this.origX,this.origY,coord[0]- this.origX,coord[1] - this.origY));
-      //funqueue[0];
    }
    onMouseLeave(){}
    onMouseEnter(){}
@@ -82,7 +78,6 @@ class DrawingRectangle extends PaintFunction{
 
     }
     onDblclick(coord,event){
-        //alert('aaaaaa');
         if(this.endDrawing && isPointInGraphicArea(coord)){
             graphicArea.reset();
             this.drawRectangle(this.contextReal , null);
@@ -99,9 +94,9 @@ class DrawingRectangle extends PaintFunction{
          case (this.points.length==1):
             if (getDistinctFromStartPointToEndPoint(this.points[0][0] , this.points[0][1], coord)  >= minDrawLength){
                 drawTarget.fillRect(Math.min(this.points[0][0], coord[0]),Math.min(this.points[0][1], coord[1]),calculateLengthAbsolute(this.points[0][0],coord[0]) ,
-                calculateLengthAbsolute(this.points[0][1],coord[1]) );
+                calculateLengthAbsolute(this.points[0][1],coord[1]));
                 drawTarget.strokeRect(Math.min(this.points[0][0], coord[0]),Math.min(this.points[0][1], coord[1]),calculateLengthAbsolute(this.points[0][0],coord[0]) ,
-                calculateLengthAbsolute(this.points[0][1],coord[1]) );
+                calculateLengthAbsolute(this.points[0][1],coord[1]));
             }
             break;
          case (this.points.length==2):

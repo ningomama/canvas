@@ -1,4 +1,3 @@
-//done?
 class DrawingNormal extends PaintFunction{
     constructor(contextReal,contextDraft){
         super();
@@ -8,11 +7,12 @@ class DrawingNormal extends PaintFunction{
     }
     reset(){
         this.endDrawing = false;
+        //save all the mouse position when onDragging 
         this.points = [];
         this.contextDraft.clearRect(0,0,canvasDraft.width,canvasDraft.height);
-        console.log("reset()");
+        //console.log("reset()");
     }
-
+    //drawing to the real canvas if the drawing is finish
     finishGraphic(){
         if(this.endDrawing){
             this.draw(this.contextReal,null);
@@ -21,12 +21,14 @@ class DrawingNormal extends PaintFunction{
 
     draw(drawTarget , coord){ 
         if(this.points.length>0){
-            //alert('ssss');
+            //setting
             drawTarget.strokeStyle = strokeBrush.color;
             drawTarget.lineWidth = strokeBrush.width;
             drawTarget.beginPath();
+            //move to the first Dragging point
             drawTarget.moveTo(this.points[0][0],this.points[0][1]);
             for (let i=0;i<this.points.length-1;i++){
+                //draw all by the points
                 drawTarget.lineTo(this.points[i][0],this.points[i][1]);
             }
             drawTarget.stroke();
@@ -34,12 +36,12 @@ class DrawingNormal extends PaintFunction{
     }
 
     onMouseDown(coord,event){
+        
         if(!isPointInGraphicArea(coord) && this.endDrawing){
             graphicArea.reset();
             this.finishGraphic();
             currentFunction = new DrawingNormal(contextReal,contextDraft);
             canvasPush();
-            
             //currentFunction.onMouseUp(coord);
         }
     }
@@ -72,13 +74,7 @@ class DrawingNormal extends PaintFunction{
 
 
     onMouseLeave(coord,event){
-        if(!this.endDrawing){
-            //calculateGraphicAreaSize(this.points);
-            this.endDrawing = true;
-            //graphicArea.enable = true;
-        }
-        this.onMouseDown(coord,event);
-
+        //this.reset();
     }
     onMouseEnter(){}
 
