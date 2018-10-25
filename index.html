@@ -31,6 +31,10 @@
             <!-- canvas section -->           
             <canvas id="canvas-real" class="canvas" width='960px' height='540px'></canvas>
             <canvas id="canvas-draft" class="canvas" width='960px' height='540px' usemap="#planetmap"></canvas>
+           
+
+            <input id="test" type="textarea">
+            
             <map name="planetmap">
                 <area id='top-left'  shape="rect" coords="0,0,10,10"  >
                 <area id='top-right'  shape="rect" coords="0,0,10,10"  >
@@ -133,13 +137,13 @@
             });
 
             $('#drawing-text').click(() => {
-                if (currentFunction.endDrawing) {
-                    // //need to maintain
-                    // currentFunction.drawLine(currentFunction.contextReal,null);
-                }
-                currentFunction = new DrawingText(contextReal,contextDraft);
+                // if (currentFunction.endDrawing) {
+                //     // //need to maintain
+                //     // currentFunction.drawLine(currentFunction.contextReal,null);
+                // }
                 graphicArea.reset();
                 needFinishGraphic();
+                currentFunction = new DrawingText(contextReal,contextDraft);
             });
             $('#drawing-normal').click(() => {
                 graphicArea.reset();

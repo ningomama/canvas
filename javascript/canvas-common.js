@@ -110,13 +110,11 @@ $("#canvas-draft")
 }); 
 
 
-
-$("body").keypress(function(e){
-    dragging = false;
-    // let mouseX = e.offsetX;
-    // let mouseY = e.offsetY;
-    let keycode = (e.keyCode ? e.keyCode : e.which);
-    if(keycode == '13'){
+$("body").on("keypress", function(e){
+    console.log(e.which)
+    if(e.which == '13'){
+        e.preventDefault();
+        console.log($(this).val())
      currentFunction.onKeyEnter(e);
     }
    
