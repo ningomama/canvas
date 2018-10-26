@@ -34,8 +34,7 @@
             <area id='bottom-left' shape="rect" coords="0,0,10,10">
             <area id='bottom-right' shape="rect" coords="0,0,10,10">
         </map>
-
-
+        
         <!-- tool-bar for shapes, brush, color and eraser -->
         <div id="tool-bar">
 
@@ -133,13 +132,13 @@
             });
 
             $('#drawing-text').click(() => {
-                if (currentFunction.endDrawing) {
-                    // //need to maintain
-                    // currentFunction.drawLine(currentFunction.contextReal,null);
-                }
-                currentFunction = new DrawingText(contextReal, contextDraft);
+                // if (currentFunction.endDrawing) {
+                //     // //need to maintain
+                //     // currentFunction.drawLine(currentFunction.contextReal,null);
+                // }
                 graphicArea.reset();
                 needFinishGraphic();
+                currentFunction = new DrawingText(contextReal,contextDraft);
             });
             $('#drawing-normal').click(() => {
                 graphicArea.reset();

@@ -104,6 +104,12 @@ input[type=range]{
     background-color: #fff;
 }
 
+/* #test{
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    z-index: 999;
+} */
 
 .textbox{
     visibility: hidden;
