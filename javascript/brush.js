@@ -1,12 +1,14 @@
 let strokeBrush = {
         color: "#000",
-        opacity: 1,
+        // Opacity needs to be reworked to work with undo/redo
+        // opacity: 1,
         width: 10,
     }
 
 let fillBrush = {
         color: "#000",
-        opacity: 1,
+        // Opacity needs to be reworked to work with undo/redo
+        // opacity: 1,
 }
 
 $('.line-color').on('input', function () {
@@ -30,7 +32,9 @@ $('#brush-width').on('input', function () {
 
 });
 
-$('#opacity').on('input', function () {
-    strokeBrush.opacity = this.value/10;
-});
+// Currently disabled 
+
+// $('#opacity').on('input', function () {
+//     strokeBrush.opacity = this.value/10;
+// });
 

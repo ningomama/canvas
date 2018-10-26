@@ -26,8 +26,8 @@
         </div>
 
         <!-- canvas section -->
-        <canvas id="canvas-real" class="canvas" width='960px' height='540px'></canvas>
-        <canvas id="canvas-draft" class="canvas" width='960px' height='540px' usemap="#planetmap"></canvas>
+        <canvas id="canvas-real" class="canvas" width='1300px' height='540px'></canvas>
+        <canvas id="canvas-draft" class="canvas" width='1300px' height='540px' usemap="#planetmap"></canvas>
         <map name="planetmap">
             <area id='top-left' shape="rect" coords="0,0,10,10">
             <area id='top-right' shape="rect" coords="0,0,10,10">
@@ -40,8 +40,11 @@
 
             <div class="tool-plate hide">
                 <div class="tool-slide">
-                    <div>0</div> <input title="Opacity" type="range" id="opacity" min="0" max="10" value="10">
-                    <div>100%</div>
+
+                    <!-- REMOVED as it currently is not working correctly with undo/redo function -->
+
+                    <!-- <div>0</div> <input title="Opacity" type="range" id="opacity" min="0" max="10" value="10">
+                    <div>100%</div> -->
                 </div>
                 <div class="colorbox">
                     <div><i class="fas fa-pencil-alt"></i></div>
@@ -89,7 +92,7 @@
     <script type='text/javascript' src="./javascript/editDrawingArea.js"></script>
     <script type='text/javascript' src="./javascript/drawing-line.js"></script>
     <script type='text/javascript' src="./javascript/drawing-rectangle.js"></script>
-    <script type='text/javascript' src="./javascript/drawing-text.js"></script>
+    <!-- <script type='text/javascript' src="./javascript/drawing-text.js"></script> -->
     <script type='text/javascript' src="./javascript/drawing-normal.js"></script>
     <script type='text/javascript' src="./javascript/drawing-circle.js"></script>
     <script type='text/javascript' src="./javascript/drawing-polygon.js"></script>
@@ -203,7 +206,7 @@
                         break;
                 }
             }
-            //push the blank picture first into the canvasArray in the start
+            //push the blank picture first into the canvasArray at the start allowing to undo/redo the first stroke on canvas
             canvasPush();
         })
 
