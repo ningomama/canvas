@@ -1,5 +1,5 @@
 let canvasArray = new Array();
-let canvasStep = -1;
+let canvasStep = -1; // so that it can correspond to the array position of the last stroke
 
 function canvasPush() {
     canvasStep++;
@@ -19,9 +19,9 @@ undo.addEventListener('click', function () {
         canvasStep--;
         // It is functionally equivalent to document.createElement('img')
         let canvasImage = new Image();
-        canvasImage.src = canvasArray[canvasStep];
+        canvasImage.src = canvasArray[canvasStep]; // canvasImage will be the previous array value
         canvasImage.onload = function () {
-            contextReal.drawImage(canvasImage, 0, 0);
+            contextReal.drawImage(canvasImage, 0, 0); // onload, draw that previous snapshot to canvas
         }
     }
 })
