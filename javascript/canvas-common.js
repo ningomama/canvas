@@ -5,6 +5,8 @@ let contextDraft = canvasDraft.getContext('2d');
 let currentFunction;
 let dragging = false;
 
+canvasReal.width = canvasDraft.width = window.innerWidth*0.8;
+
 // setting the canvas background for undo/redo compatibility
 contextReal.fillStyle = '#fff';
 contextReal.fillRect(0, 0, contextReal.canvas.width, contextReal.canvas.height);

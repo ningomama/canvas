@@ -11,7 +11,7 @@
     <link href="style.css" rel="stylesheet" type='text/css'>
 </head>
 
-<body> 
+<body>
 
 
     <div id="canvas-container">
@@ -26,15 +26,15 @@
         </div>
 
         <!-- canvas section -->
-        <canvas id="canvas-real" class="canvas" width='1300px' height='540px'></canvas>
-        <canvas id="canvas-draft" class="canvas" width='1300px' height='540px' usemap="#planetmap"></canvas>
+        <canvas id="canvas-real" class="canvas" height='540px'></canvas>
+        <canvas id="canvas-draft" class="canvas" height='540px' usemap="#planetmap"></canvas>
         <map name="planetmap">
             <area id='top-left' shape="rect" coords="0,0,10,10">
             <area id='top-right' shape="rect" coords="0,0,10,10">
             <area id='bottom-left' shape="rect" coords="0,0,10,10">
             <area id='bottom-right' shape="rect" coords="0,0,10,10">
         </map>
-        
+
         <!-- tool-bar for shapes, brush, color and eraser -->
         <div id="tool-bar">
 
@@ -134,15 +134,15 @@
                 currentFunction = new ArtBrush(contextReal, 20, 32, 5);
             });
 
-            $('#drawing-text').click(() => {
-                // if (currentFunction.endDrawing) {
-                //     // //need to maintain
-                //     // currentFunction.drawLine(currentFunction.contextReal,null);
-                // }
-                graphicArea.reset();
-                needFinishGraphic();
-                currentFunction = new DrawingText(contextReal,contextDraft);
-            });
+            // $('#drawing-text').click(() => {
+            //     // if (currentFunction.endDrawing) {
+            //     //     // //need to maintain
+            //     //     // currentFunction.drawLine(currentFunction.contextReal,null);
+            //     // }
+            //     graphicArea.reset();
+            //     needFinishGraphic();
+            //     currentFunction = new DrawingText(contextReal, contextDraft);
+            // });
             $('#drawing-normal').click(() => {
                 graphicArea.reset();
                 needFinishGraphic();
@@ -193,8 +193,8 @@
                         break;
                     case currentFunction instanceof ArtBrush:
                         break;
-                    case currentFunction instanceof DrawingText:
-                        break;
+                    // case currentFunction instanceof DrawingText:
+                    //     break;
                     case currentFunction instanceof DrawingNormal:
                         break;
                     default:

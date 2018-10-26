@@ -3,8 +3,10 @@ body{
 }
 
 .control{
-    width: 100%;
+    width: 80%;
+    margin: auto;
     display: flex;
+    padding-top: 5px;
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
@@ -17,7 +19,9 @@ body{
    box-shadow: 0 0 10px rgb(177, 174, 174);
    position:absolute;
    top:50px;
-   left:70px;
+   left:0;
+   right:0;
+   margin: auto;
 }
 
 #canvas-draft{
@@ -49,7 +53,7 @@ input[type=range]{
     justify-content: flex-end;
     position: absolute;
     top: 630px;
-
+    /* right: 70px; */
 }
 
 #tool-box{
